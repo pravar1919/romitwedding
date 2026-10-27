@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "romit-ayushi-wedding",
+  "compatibility_date": "2026-10-01",
+  // Fully static site: `next build` exports to ./out, served as Workers static assets.
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "404-page"
+  },
+  // Keep `siteUrl` in lib/config.ts in sync with the main domain (used for WhatsApp link previews).
+  // keep the original *.workers.dev link alive — it has already been shared
+  "workers_dev": true,
+  "preview_urls": false,
+  "routes": [
+    { "pattern": "romitayushi.in", "custom_domain": true },
+    { "pattern": "www.romitayushi.in", "custom_domain": true }
+  ],
+  "observability": { "enabled": true }
+}
