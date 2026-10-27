@@ -47,7 +47,7 @@ const binds = {
   familyNameB: CONFIG.families.b.name, familyParentsB: CONFIG.families.b.parents,
   dateLong: fmt(weddingDay, { day: 'numeric', month: 'long', year: 'numeric' }),
   dateRangeCaps: `${fmt(first, { day: 'numeric', month: 'short' })} – ${fmt(last, { day: 'numeric', month: 'short', year: 'numeric' })}`,
-  cityCaps: CONFIG.city, heroLine: CONFIG.heroLine, tagline: CONFIG.tagline, farewell: CONFIG.farewell, hashtag: CONFIG.hashtag, firm: CONFIG.firm,
+  cityCaps: CONFIG.city, heroLine: CONFIG.heroLine, tagline: CONFIG.tagline, farewell: CONFIG.farewell, hashtag: CONFIG.hashtag, firmName: CONFIG.firm.name, firmPlace: CONFIG.firm.place,
   roman: `${toRoman(num(weddingDay,'day'))} · ${toRoman(num(weddingDay,'month'))} · ${toRoman(num(weddingDay,'year'))}`,
   ceremonyLabel: `Until the pheras · ${fmt(ceremony, { weekday: 'long', day: 'numeric', month: 'long' })}, ${time(ceremony).toLowerCase()} ${CONFIG.tzLabel}`,
 };
@@ -449,11 +449,11 @@ function playMonogram(){
       const dx = (t.left + t.width / 2) - (s.left + s.width / 2), dy = (t.top + t.height / 2) - (s.top + s.height / 2);
       const k = Math.max(.25, Math.min(1, t.height / s.height * 1.15)), at = i * .25;
       monoTl
-        .fromTo(fly, { opacity: 0, scale: 1 }, { opacity: 1, scale: 1.18, y: -14, duration: .4, ease: 'power2.out' }, at)
-        .to(fly, { keyframes: { x: [0, dx * .35, dx], y: [-14, dy * .35 - 40, dy], scale: [1.18, (1.18 + k) / 2, k], easeEach: 'none' }, duration: .95, ease: 'power2.inOut' }, at + .45)
+        .fromTo(fly, { opacity: 0, scale: 1 }, { opacity: 1, scale: 1.45, y: -22, duration: .4, ease: 'back.out(2)' }, at)
+        .to(fly, { keyframes: { x: [0, dx * .35, dx], y: [-22, dy * .35 - 48, dy], scale: [1.45, (1.45 + k) / 2, k], easeEach: 'none' }, duration: .95, ease: 'power2.inOut' }, at + .45)
         .to(fly, { opacity: 0, duration: .25, ease: 'power1.in' }, at + 1.2)
-        .fromTo(targets[i], { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: .5, ease: 'back.out(2.2)',
-          onStart: () => fx.sparkle(t.left + t.width / 2, t.top + t.height / 2, 14, 1.4) }, at + 1.2);
+        .fromTo(targets[i], { opacity: 0, scale: 2.2 }, { opacity: 1, scale: 1, duration: .6, ease: 'back.out(3)',
+          onStart: () => fx.sparkle(t.left + t.width / 2, t.top + t.height / 2, 26, 1.8) }, at + 1.2);
     });
   }, 1400);
 }
