@@ -7,21 +7,43 @@ const EVENTS = { view: 'Opened the link', open: 'Tapped â€œOpen Your Invitationâ
 const istDay = () => new Date(Date.now() + 5.5 * 3600e3).toISOString().slice(0, 10);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
+const reject = status => new Response(null, { status });
+
+/* constant-time string compare, so the stats key can't be guessed by timing */
+function sameKey(a, b) {
+  if (typeof a !== 'string' || typeof b !== 'string' || a.length !== b.length) return false;
+  let d = 0;
+  for (let i = 0; i < a.length; i++) d |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return d === 0;
+}
+
 async function hit(request, env) {
+  /* only the site's own pages may report hits (browsers always send Origin on this POST) */
+  let sameOrigin = false;
+  try { sameOrigin = new URL(request.headers.get('origin')).host === new URL(request.url).host; } catch {}
+  if (!sameOrigin) return reject(403);
+  if (!(request.headers.get('content-type') || '').startsWith('application/json')) return reject(415);
+  /* Cloudflare's per-IP limiter; it counts loosely (spread across instances), so it only stops sustained floods */
+  if (env.HIT_LIMIT) {
+    const { success } = await env.HIT_LIMIT.limit({ key: request.headers.get('cf-connecting-ip') || 'unknown' });
+    if (!success) return reject(429);
+  }
+  const text = await request.text();
+  if (text.length > 200) return reject(413);
   let body;
-  try { body = await request.json(); } catch { return new Response(null, { status: 400 }); }
-  const { e, v } = body || {};
-  if (!EVENTS[e] || typeof v !== 'string' || !/^[a-z0-9]{8,32}$/.test(v)) return new Response(null, { status: 400 });
+  try { body = JSON.parse(text); } catch { return reject(400); }
+  const { e, v } = body && typeof body === 'object' ? body : {};
+  if (typeof e !== 'string' || !Object.hasOwn(EVENTS, e) || typeof v !== 'string' || !/^[a-z0-9]{8,32}$/.test(v)) return reject(400);
   const day = istDay();
   await env.DB.batch([
     env.DB.prepare('INSERT INTO hits (day, event, n) VALUES (?1, ?2, 1) ON CONFLICT (day, event) DO UPDATE SET n = n + 1').bind(day, e),
     env.DB.prepare('INSERT OR IGNORE INTO visitors (event, vid, day) VALUES (?1, ?2, ?3)').bind(e, v, day),
   ]);
-  return new Response(null, { status: 204 });
+  return reject(204);
 }
 
 async function stats(url, env) {
-  if (!env.STATS_KEY || url.searchParams.get('key') !== env.STATS_KEY) return new Response('Not found', { status: 404 });
+  if (!env.STATS_KEY || !sameKey(url.searchParams.get('key'), env.STATS_KEY)) return new Response('Not found', { status: 404 });
   const [{ results: totals }, { results: people }, { results: days }, { results: newPeople }] = await env.DB.batch([
     env.DB.prepare('SELECT event, SUM(n) AS n FROM hits GROUP BY event'),
     env.DB.prepare('SELECT event, COUNT(*) AS n FROM visitors GROUP BY event'),
@@ -50,13 +72,18 @@ table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font
 <table><thead><tr><th>Day</th>${keys.map(e => `<th>${EVENTS[e]}</th>`).join('')}</tr></thead><tbody>${rows || `<tr><td colspan="${keys.length + 1}">No visits yet.</td></tr>`}</tbody></table>
 <p style="margin-top:12px">New devices that day, with total times in brackets.</p></main>
 <script>try{localStorage.setItem('rohi-notrack','1')}catch(e){}</script></body></html>`;
-  return new Response(html, { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex' } });
+  return new Response(html, { headers: {
+    'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex',
+    /* the key is in the URL, so never leak it as a referrer, and lock the page down */
+    'referrer-policy': 'no-referrer', 'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff',
+    'content-security-policy': "default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+  } });
 }
 
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    if (url.pathname === '/api/hit' && request.method === 'POST') return hit(request, env);
+    if (url.pathname === '/api/hit') return request.method === 'POST' ? hit(request, env) : reject(405);
     if (url.pathname === '/stats') return stats(url, env);
     return env.ASSETS.fetch(request);
   },
