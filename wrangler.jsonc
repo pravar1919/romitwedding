@@ -2,11 +2,18 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "romit-ayushi-wedding",
   "compatibility_date": "2026-10-01",
-  // Fully static site: `next build` exports to ./out, served as Workers static assets.
+  // `next build` exports the site to ./out, served as Workers static assets.
+  // worker/index.js only runs for the visit counter (/api/hit) and the private /stats page.
+  "main": "worker/index.js",
   "assets": {
     "directory": "./out",
-    "not_found_handling": "404-page"
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*", "/stats"]
   },
+  "d1_databases": [
+    { "binding": "DB", "database_name": "romit-ayushi-stats", "database_id": "7377156f-d2df-41e6-9d62-e4e5483fdabf" }
+  ],
   // Keep `siteUrl` in lib/config.ts in sync with the main domain (used for WhatsApp link previews).
   // keep the original *.workers.dev link alive — it has already been shared
   "workers_dev": true,

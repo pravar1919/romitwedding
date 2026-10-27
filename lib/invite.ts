@@ -16,6 +16,19 @@ const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const store = { get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }, set(k,v){ try { localStorage.setItem(k,v); } catch(e){} } };
 
+/* ---------------- Visit counter (worker/index.js); a device that has opened /stats is never counted ---------------- */
+const track = (() => {
+  const sent = new Set();
+  let vid = store.get('rohi-vid');
+  if (!vid) { vid = Math.random().toString(36).slice(2, 12) + Date.now().toString(36); store.set('rohi-vid', vid); }
+  return e => {
+    if (sent.has(e) || store.get('rohi-notrack') || /^(localhost|127\.)/.test(location.hostname)) return;
+    sent.add(e);
+    try { fetch('/api/hit', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ e, v: vid }), keepalive: true }).catch(() => {}); } catch(err){}
+  };
+})();
+track('view');
+
 /* ---------------- Dates & text bindings ---------------- */
 const TZ = CONFIG.timezone;
 const fmt = (d, o) => new Intl.DateTimeFormat('en-GB', { timeZone: TZ, ...o }).format(d);
@@ -346,6 +359,7 @@ const music = (() => {
   if (document.readyState === 'complete') setTimeout(load, 300); else addEventListener('load', () => setTimeout(load, 300), { once: true });
   function toggle(force){
     on = force ?? !on;
+    if (on) track('music');
     btn.setAttribute('aria-pressed', on); btn.setAttribute('aria-label', on ? 'Pause music' : 'Play music');
     if (!ready) return;
     on ? player.playVideo() : player.pauseVideo();
@@ -434,6 +448,7 @@ playMonogram();
 function openInvite(){
   if (intro.classList.contains('opening')) return;
   intro.classList.add('opening');
+  track('open');
   monoReset(true);
   if (!useGsap) root.classList.add('reveal-ready');
   const b = $('#open-invite').getBoundingClientRect();
