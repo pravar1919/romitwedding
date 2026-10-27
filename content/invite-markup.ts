@@ -56,6 +56,7 @@ const markup = `<!-- ============ SVG LIBRARY ============ -->
     <div class="ganesh rise" style="--i:0"><span class="ganesh__halo" aria-hidden="true"></span><div class="ganesh__img" id="ganesh"></div><p class="ganesh__mantra" lang="hi">॥ श्री गणेशाय नमः ॥</p></div>
     <p class="lead rise" style="--i:1">You are cordially invited<br>to the wedding of</p>
     <h1 class="intro__names shimmer-gold rise" style="--i:2" id="intro-names"><span data-bind="nameA">Romit</span> <span class="amp">&amp;</span> <span data-bind="nameB"><span class="cap-a">A</span>yushi</span></h1>
+    <div class="intro__families rise" style="--i:3"><p><span class="fam-name" data-bind="familyNameA">Romit Gupta</span><span class="fam-parents" data-bind="familyParentsA">S/o Ranjana &amp; Radhey Shyam Gupta</span></p><p><span class="fam-name" data-bind="familyNameB">Ayushi Gupta</span><span class="fam-parents" data-bind="familyParentsB">D/o Usha Gupta &amp; Mahaveer Prasad Gupta</span></p></div>
     <p class="intro__date rise" style="--i:3"><span data-bind="dateLong">30 November 2026</span><br><span data-bind="cityCaps">Alwar, Rajasthan</span></p>
     <p class="intro__tag rise" style="--i:4" data-bind="hashtag">#ROHI</p>
     <svg class="divider rise" style="--i:4" viewBox="0 0 220 22" aria-hidden="true"><use href="#ornament"/></svg>

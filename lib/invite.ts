@@ -30,6 +30,8 @@ const num = (d, k) => +fmt(d, { [k]: 'numeric' });
 const { a: A, b: B } = CONFIG.couple;
 const binds = {
   nameA: A, nameB: B, initialA: A[0], initialB: B[0],
+  familyNameA: CONFIG.families.a.name, familyParentsA: CONFIG.families.a.parents,
+  familyNameB: CONFIG.families.b.name, familyParentsB: CONFIG.families.b.parents,
   dateLong: fmt(weddingDay, { day: 'numeric', month: 'long', year: 'numeric' }),
   dateRangeCaps: `${fmt(first, { day: 'numeric', month: 'short' })} – ${fmt(last, { day: 'numeric', month: 'short', year: 'numeric' })}`,
   cityCaps: CONFIG.city, heroLine: CONFIG.heroLine, tagline: CONFIG.tagline, farewell: CONFIG.farewell, hashtag: CONFIG.hashtag,
@@ -364,9 +366,59 @@ function drawArch(){
 }
 drawArch();
 new ResizeObserver(drawArch).observe(archSvg);
+/* the hashtag is spelled out by "Ro" and "hi" flying down from the names */
+const tagEl = $('.intro__tag', intro);
+const tagParts = [A.slice(0, 2), B.slice(-2)];
+const canMonogram = CONFIG.hashtag.toUpperCase() === ('#' + tagParts.join('')).toUpperCase();
+if (canMonogram) tagEl.innerHTML = `#<span class="tag-part">${esc(tagParts[0].toUpperCase())}</span><span class="tag-part">${esc(tagParts[1].toUpperCase())}</span>`;
+let monoTl = null, monoTimer = 0;
+function monoReset(done){
+  clearTimeout(monoTimer); monoTl && monoTl.kill(); monoTl = null;
+  $$('.tag-fly', intro).forEach(el => el.remove());
+  $$('.tag-part', tagEl).forEach(el => { el.style.opacity = done ? '' : '0'; el.style.transform = ''; });
+}
+function letterRange(el, fromEnd){
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), nodes = [];
+  while (walker.nextNode()) if (walker.currentNode.length) nodes.push(walker.currentNode);
+  const n = fromEnd ? nodes[nodes.length - 1] : nodes[0], r = document.createRange();
+  if (!n || n.length < 2) return null;
+  fromEnd ? r.setStart(n, n.length - 2) : r.setStart(n, 0); fromEnd ? r.setEnd(n, n.length) : r.setEnd(n, 2);
+  return r;
+}
+function playMonogram(){
+  if (!canMonogram) return;
+  monoReset(reduce);
+  if (reduce) return;
+  monoTimer = setTimeout(async () => {
+    try { await document.fonts.ready; } catch(e){}
+    if (intro.classList.contains('opening')) return monoReset(true);
+    const names = $('#intro-names'), fontSize = getComputedStyle(names).fontSize;
+    const sources = [letterRange($('[data-bind="nameA"]', names), false), letterRange($('[data-bind="nameB"]', names), true)];
+    const targets = $$('.tag-part', tagEl);
+    if (sources.some(r => !r)) return monoReset(true);
+    monoTl = gsap.timeline({ onComplete: () => monoReset(true) });
+    sources.forEach((range, i) => {
+      const s = range.getBoundingClientRect(), t = targets[i].getBoundingClientRect();
+      const fly = document.createElement('span');
+      fly.className = 'tag-fly'; fly.setAttribute('aria-hidden', 'true'); fly.textContent = range.toString();
+      Object.assign(fly.style, { left: s.left + 'px', top: s.top + 'px', width: s.width + 'px', height: s.height + 'px', lineHeight: s.height + 'px', fontSize });
+      intro.appendChild(fly);
+      const dx = (t.left + t.width / 2) - (s.left + s.width / 2), dy = (t.top + t.height / 2) - (s.top + s.height / 2);
+      const k = Math.max(.25, Math.min(1, t.height / s.height * 1.15)), at = i * .35;
+      monoTl
+        .fromTo(fly, { opacity: 0, scale: 1 }, { opacity: 1, scale: 1.18, y: -14, duration: .55, ease: 'power2.out' }, at)
+        .to(fly, { keyframes: { x: [0, dx * .35, dx], y: [-14, dy * .35 - 40, dy], scale: [1.18, (1.18 + k) / 2, k], easeEach: 'none' }, duration: 1.2, ease: 'power2.inOut' }, at + .65)
+        .to(fly, { opacity: 0, duration: .3, ease: 'power1.in' }, at + 1.6)
+        .fromTo(targets[i], { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: .5, ease: 'back.out(2.2)',
+          onStart: () => fx.sparkle(t.left + t.width / 2, t.top + t.height / 2, 14, 1.4) }, at + 1.6);
+    });
+  }, 2500);
+}
+playMonogram();
 function openInvite(){
   if (intro.classList.contains('opening')) return;
   intro.classList.add('opening');
+  monoReset(true);
   if (!useGsap) root.classList.add('reveal-ready');
   const b = $('#open-invite').getBoundingClientRect();
   fx.sparkle(innerWidth/2, innerHeight/2, 60, 3.4);
@@ -380,6 +432,7 @@ function replay(){
   hero.classList.remove('live');
   intro.style.display = ''; intro.classList.remove('opening', 'gone'); root.classList.add('intro-open');
   $$('.rise', intro).forEach(el => { el.style.animation = 'none'; void el.offsetWidth; el.style.animation = ''; });
+  playMonogram();
   $('#open-invite').focus();
 }
 $('#open-invite').addEventListener('click', openInvite);

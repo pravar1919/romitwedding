@@ -7,6 +7,7 @@ export const CONFIG = {
   // Public address of the site, used for link previews (WhatsApp, iMessage, etc.)
   siteUrl: 'https://romitayushi.in',
   couple: { a: 'Romit', b: 'Ayushi' },
+  families: { a: { name: 'Romit Gupta', parents: 'S/o Ranjana & Radhey Shyam Gupta' }, b: { name: 'Ayushi Gupta', parents: 'D/o Usha Gupta & Mahaveer Prasad Gupta' } }, // shown under the names on the invitation
   hashtag: '#ROHI',
   ganpati: { src: '/ganpatiji.webp', cutout: true }, // image of Lord Ganesha for the invitation screen (cutout: transparent PNG/WebP, shown unframed); null shows a gold Om medallion
   tagline: 'Two families, two days, one promise in the Aravalli hills.',
@@ -20,7 +21,7 @@ export const CONFIG = {
   venues: [
     {
       id: 'sagar', name: 'The Sagar Resort', address: 'Sariska Tiger Reserve Road, Kati Ghati, Alwar, Rajasthan 301001',
-      note: 'All celebrations are at the resort. Front desk: +91 91191 12587.', scene: 'palace',
+      note: 'All celebrations are at the resort.', scene: 'palace',
       map: 'https://www.google.com/maps/dir//Sagar+Resorts,+Kati+ghati,+Sariska+Road,+Liwari,+Rajasthan+301001/@26.9024618,75.7487774,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x39729baf8d82fa2b:0x5b123418a4d64a70!2m2!1d76.5838697!2d27.5149871', // Google Maps directions to the resort
       mapEmbed: 'https://maps.google.com/maps?q=27.5149871,76.5838697&z=14&output=embed',
     },
@@ -53,7 +54,7 @@ export const CONFIG = {
     ]},
     { title: 'Where to stay', icon: 'hotel', items: [
       ['The Sagar Resort', 'Guests stay at the venue · room details to follow'],
-      ['Contact', '+91 91191 12587 · thesagarresort@gmail.com'],
+      ['Contact', '0144-2346378 · 7597021300 · 9460828283'],
     ]},
     { title: 'Good to know', icon: 'guide', items: [
       ['Late-November weather', 'Pleasant days and chilly evenings in the Aravallis. Bring a shawl.'],
