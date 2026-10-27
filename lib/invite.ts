@@ -311,29 +311,40 @@ const fx = (() => {
 })();
 fx.start();
 
-/* ---------------- Music: soft synthesized tanpura drone + santoor-like plucks ---------------- */
+/* ---------------- Music: the couple's song, through a hidden YouTube player ---------------- */
 const music = (() => {
-  let ac, master, timer, on = false;
+  let player, ready = false, on = false;
   const btn = $('#music-btn');
-  const SCALE = [261.63, 293.66, 329.63, 392.0, 440.0, 523.25, 587.33, 659.25];
-  function pluck(){
-    const t = ac.currentTime, fq = SCALE[Math.random()*SCALE.length|0];
-    [1, 2.01].forEach((m, i) => { const o = ac.createOscillator(), g = ac.createGain(); o.type = i ? 'sine' : 'triangle'; o.frequency.value = fq*m; g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(i ? .03 : .07, t + .01); g.gain.exponentialRampToValueAtTime(.0001, t + 2.6); o.connect(g).connect(master); o.start(t); o.stop(t + 2.8); });
-    timer = setTimeout(pluck, 600 + Math.random()*1600);
+  const id = CONFIG.song.youtubeId;
+  btn.title = CONFIG.song.title;
+  /* the player is built ahead of time so the first tap can start it inside the gesture (iOS refuses play() later) */
+  function load(){
+    const host = document.createElement('div');
+    host.setAttribute('aria-hidden', 'true');
+    host.style.cssText = 'position:fixed;left:-9999px;top:0;width:200px;height:200px;opacity:0;pointer-events:none';
+    host.innerHTML = '<div id="yt-song"></div>';
+    document.body.appendChild(host);
+    const prev = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = () => {
+      prev && prev();
+      player = new YT.Player('yt-song', {
+        host: 'https://www.youtube-nocookie.com', videoId: id, width: 200, height: 200,
+        playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: id, playsinline: 1, rel: 0 },
+        events: {
+          onReady: () => { ready = true; player.setVolume(70); if (on) player.playVideo(); },
+          onStateChange: e => { if (e.data === YT.PlayerState.PLAYING && !on) player.pauseVideo(); },
+        },
+      });
+    };
+    const s = document.createElement('script'); s.src = 'https://www.youtube.com/iframe_api'; s.async = true;
+    document.head.appendChild(s);
   }
-  function startAudio(){
-    ac = ac || new (window.AudioContext || window.webkitAudioContext)();
-    master = ac.createGain(); master.gain.value = 0; master.connect(ac.destination);
-    const lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 900; lp.connect(master);
-    [130.81, 196.0, 261.63, 130.81*1.003].forEach((fq, i) => { const o = ac.createOscillator(), g = ac.createGain(), l = ac.createOscillator(), lg = ac.createGain(); o.type = 'sawtooth'; o.frequency.value = fq; g.gain.value = .025; l.frequency.value = .15 + i*.07; lg.gain.value = .012; l.connect(lg).connect(g.gain); o.connect(g).connect(lp); o.start(); l.start(); });
-    master.gain.linearRampToValueAtTime(.7, ac.currentTime + 2.5);
-    pluck();
-  }
+  if (document.readyState === 'complete') setTimeout(load, 300); else addEventListener('load', () => setTimeout(load, 300), { once: true });
   function toggle(force){
     on = force ?? !on;
     btn.setAttribute('aria-pressed', on); btn.setAttribute('aria-label', on ? 'Pause music' : 'Play music');
-    if (on) { if (!master) startAudio(); else { ac.resume(); master.gain.cancelScheduledValues(ac.currentTime); master.gain.linearRampToValueAtTime(.7, ac.currentTime + 1.5); clearTimeout(timer); pluck(); } }
-    else if (master) { master.gain.cancelScheduledValues(ac.currentTime); master.gain.linearRampToValueAtTime(0, ac.currentTime + .8); clearTimeout(timer); }
+    if (!ready) return;
+    on ? player.playVideo() : player.pauseVideo();
   }
   btn.addEventListener('click', () => toggle());
   return { toggle };
