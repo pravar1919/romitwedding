@@ -16,7 +16,7 @@
     { "name": "HIT_LIMIT", "namespace_id": "1001", "simple": { "limit": 30, "period": 60 } }
   ],
   "d1_databases": [
-    { "binding": "DB", "database_name": "romit-ayushi-stats", "database_id": "7377156f-d2df-41e6-9d62-e4e5483fdabf" }
+    { "binding": "DB", "database_name": "romit-ayushi-stats", "database_id": "348473d5-2ead-4b8e-a555-28d4ee25a315" }
   ],
   // Keep `siteUrl` in lib/config.ts in sync with the main domain (used for WhatsApp link previews).
   // keep the original *.workers.dev link alive — it has already been shared
