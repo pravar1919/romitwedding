@@ -82,7 +82,7 @@ const markup = `<!-- ============ SVG LIBRARY ============ -->
 <main>
 <!-- ============ HERO ============ -->
 <section class="hero" id="home" aria-labelledby="hero-names">
-  <div class="hero__scene" id="hero-scene" aria-hidden="true"><img src="/hero-collage.webp" alt="" width="1672" height="941" fetchpriority="high" decoding="async"></div>
+  <div class="hero__scene" id="hero-scene" aria-hidden="true"><img src="/h-a4965d10.webp" alt="" draggable="false" width="1672" height="941" fetchpriority="high" decoding="async"></div>
   <div class="fairy" data-fairy="30" aria-hidden="true" style="top:-6px"></div>
   <div class="hero__text">
     <p class="hero__kicker hero__fade d1">The wedding celebrations of</p>
