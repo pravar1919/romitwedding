@@ -9,6 +9,7 @@ export const CONFIG = {
   couple: { a: 'Romit', b: 'Ayushi' },
   families: { a: { name: 'Romit Gupta', parents: 'S/o Ranjana & Radhey Shyam Gupta' }, b: { name: 'Ayushi Gupta', parents: 'D/o Usha Gupta & Mahaveer Prasad Gupta' } }, // shown under the names on the invitation
   hashtag: '#ROHI',
+  firm: 'Gujarmal Ghasiram', // family firm, its own line at the bottom of the invitation card
   song: { youtubeId: '1LVpuWpRs3I', start: 23, title: 'Din Shagna Da · Phillauri' }, // played by the music button through a hidden YouTube player; start (seconds) skips the instrumental intro
   ganpati: { src: '/ganpatiji.webp', cutout: true }, // image of Lord Ganesha for the invitation screen (cutout: transparent PNG/WebP, shown unframed); null shows a gold Om medallion
   tagline: 'Two families, two days, one promise in the Aravalli hills.',

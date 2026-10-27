@@ -47,7 +47,7 @@ const binds = {
   familyNameB: CONFIG.families.b.name, familyParentsB: CONFIG.families.b.parents,
   dateLong: fmt(weddingDay, { day: 'numeric', month: 'long', year: 'numeric' }),
   dateRangeCaps: `${fmt(first, { day: 'numeric', month: 'short' })} – ${fmt(last, { day: 'numeric', month: 'short', year: 'numeric' })}`,
-  cityCaps: CONFIG.city, heroLine: CONFIG.heroLine, tagline: CONFIG.tagline, farewell: CONFIG.farewell, hashtag: CONFIG.hashtag,
+  cityCaps: CONFIG.city, heroLine: CONFIG.heroLine, tagline: CONFIG.tagline, farewell: CONFIG.farewell, hashtag: CONFIG.hashtag, firm: CONFIG.firm,
   roman: `${toRoman(num(weddingDay,'day'))} · ${toRoman(num(weddingDay,'month'))} · ${toRoman(num(weddingDay,'year'))}`,
   ceremonyLabel: `Until the pheras · ${fmt(ceremony, { weekday: 'long', day: 'numeric', month: 'long' })}, ${time(ceremony).toLowerCase()} ${CONFIG.tzLabel}`,
 };
@@ -406,6 +406,13 @@ function monoReset(done){
   $$('.tag-fly', intro).forEach(el => el.remove());
   $$('.tag-part', tagEl).forEach(el => { el.style.opacity = done ? '' : '0'; el.style.transform = ''; });
 }
+/* on phones the big names are hidden, so the letters fly from "Romit Gupta" / "Ayushi Gupta" instead */
+function rangeAt(el, start, end){
+  const n = el && el.firstChild;
+  if (!n || n.nodeType !== 3 || n.length < end) return null;
+  const r = document.createRange(); r.setStart(n, start); r.setEnd(n, end);
+  return r;
+}
 function letterRange(el, fromEnd){
   const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), nodes = [];
   while (walker.nextNode()) if (walker.currentNode.length) nodes.push(walker.currentNode);
@@ -421,8 +428,12 @@ function playMonogram(){
   monoTimer = setTimeout(async () => {
     try { await document.fonts.ready; } catch(e){}
     if (intro.classList.contains('opening')) return monoReset(true);
-    const names = $('#intro-names'), fontSize = getComputedStyle(names).fontSize;
-    const sources = [letterRange($('[data-bind="nameA"]', names), false), letterRange($('[data-bind="nameB"]', names), true)];
+    const names = $('#intro-names'), famA = $('[data-bind="familyNameA"]', intro), famB = $('[data-bind="familyNameB"]', intro);
+    const fromFamilies = names.offsetHeight < 2 && famA.textContent.startsWith(A) && famB.textContent.startsWith(B);
+    const fontSize = getComputedStyle(fromFamilies ? famA : names).fontSize;
+    const sources = fromFamilies
+      ? [rangeAt(famA, 0, 2), rangeAt(famB, B.length - 2, B.length)]
+      : [letterRange($('[data-bind="nameA"]', names), false), letterRange($('[data-bind="nameB"]', names), true)];
     const targets = $$('.tag-part', tagEl);
     if (sources.some(r => !r)) return monoReset(true);
     const riseY = new DOMMatrix(getComputedStyle(tagEl).transform).m42; // the tag may still be rising into place
