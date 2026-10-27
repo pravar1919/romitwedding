@@ -136,39 +136,6 @@ function scene(kind, seed = 1, w = 600, h = 450){
 }
 const media = (item, kind) => item.src ? `<img src="${esc(item.src)}" alt="" loading="lazy">` : scene(item.scene || kind, item.seed || 1);
 
-/* ---------------- Hero scene ---------------- */
-function heroScene(){
-  const w = 1600, h = 900, hz = 660, r = rng(7);
-  let s = `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg"><defs>
-  <linearGradient id="hs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E9A5A0"/><stop offset=".35" stop-color="#F4BB9C"/><stop offset=".62" stop-color="#FAC98F"/><stop offset=".68" stop-color="#FFE1A8"/></linearGradient>
-  <radialGradient id="hsun"><stop offset="0" stop-color="#FFFBE6"/><stop offset=".25" stop-color="#FFE6A8" stop-opacity=".9"/><stop offset="1" stop-color="#FFC27A" stop-opacity="0"/></radialGradient>
-  <linearGradient id="hw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7BE8E"/><stop offset=".5" stop-color="#D98476"/><stop offset="1" stop-color="#8A3A48"/></linearGradient>
-  <linearGradient id="harch" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C79C70"/><stop offset=".5" stop-color="#F1DCBC"/><stop offset="1" stop-color="#C79C70"/></linearGradient>
-  <linearGradient id="hrail" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EBD3B0"/><stop offset="1" stop-color="#A97F57"/></linearGradient>
-  <filter id="hblur"><feGaussianBlur stdDeviation="3"/></filter>
-  </defs><rect width="${w}" height="${h}" fill="url(#hs)"/>`;
-  s += `<circle cx="1180" cy="${hz-60}" r="380" fill="url(#hsun)"/><circle cx="1180" cy="${hz-60}" r="50" fill="#FFF6DA" opacity=".95"/>`;
-  s += hills(r, w, hz-70, 90, 7, '#D89A9A') + hills(r, w, hz-30, 70, 9, '#C67B84');
-  s += `<g transform="translate(140 ${hz-140})" fill="#B66470">${palace(rng(3), 0, 40, 160, 90, '#B66470', '#FFE3A6', false)}</g>`;
-  s += town(r, 0, 560, hz, '#9C4A58', '#FFE0A0');
-  s += town(r, 1240, 1600, hz, '#9C4A58', '#FFE0A0');
-  const pal = palace(rng(21), 560, hz, 480, 220, '#7E2E3E', '#FFDB8E', false);
-  s += pal;
-  s += `<rect y="${hz}" width="${w}" height="${h-hz}" fill="url(#hw)"/>`;
-  s += `<g transform="translate(0 ${hz*2}) scale(1 -1)" opacity=".28" filter="url(#hblur)">${palace(rng(21), 560, hz, 480, 220, '#7E2E3E', '#FFDB8E', false)}</g>`;
-  s += `<ellipse cx="1180" cy="${hz+60}" rx="40" ry="100" fill="#FFF0C0" opacity=".35" filter="url(#hblur)"/>`;
-  for (let i = 0; i < 11; i++) { const y = hz + 12 + i*14, x = 700 + r()*600; s += `<line x1="${f(x)}" x2="${f(x+60+r()*80)}" y1="${y}" y2="${y}" stroke="#FFF4D6" stroke-width="${f(1+r()*1.5)}" opacity="${f(.35+r()*.4)}" style="animation-delay:${f(-r()*6)}s"/>`; }
-  // balcony railing
-  s += `<rect y="820" width="${w}" height="80" fill="url(#hrail)"/><rect y="812" width="${w}" height="12" fill="#F2DFC2"/>`;
-  for (let x = 20; x < w; x += 34) s += `<path d="M${x} 824h14v6c-6 6-6 14 0 20v6c-6 6-6 14 0 20v24h-14v-24c6-6 6-14 0-20v-6c6-6 6-14 0-20z" fill="#D9BC92" opacity=".8"/>`;
-  // carved arch frame
-  s += `<path fill-rule="evenodd" fill="url(#harch)" d="M0 0H${w}V${h}H0Z M150 ${h}V380C150 230 430 170 610 130C705 108 770 70 800 20C830 70 895 108 990 130C1170 170 1450 230 1450 380V${h}Z"/>`;
-  s += `<g fill="none" stroke="#B4884F" stroke-width="3"><path d="M150 ${h}V380C150 230 430 170 610 130C705 108 770 70 800 20C830 70 895 108 990 130C1170 170 1450 230 1450 380V${h}"/></g><g fill="none" stroke="#9C7330" stroke-width="1.4" opacity=".7"><path d="M120 ${h}V372C120 210 420 148 600 106C695 84 765 44 800 -10C835 44 905 84 1000 106C1180 148 1480 210 1480 372V${h}"/></g>`;
-  for (let y = 420; y < h; y += 60) s += `<g fill="#B4884F" opacity=".55"><circle cx="75" cy="${y}" r="8"/><circle cx="${w-75}" cy="${y}" r="8"/><path d="M75 ${y+14}l8 14l-8 14l-8-14z M${w-75} ${y+14}l8 14l-8 14l-8-14z"/></g>`;
-  s += rosesCluster(120, 830, 1.5) + rosesCluster(1480, 830, 1.5) + rosesCluster(330, 870, .9) + rosesCluster(1270, 870, .9);
-  return s + '</svg>';
-}
-
 /* ---------------- Event icons ---------------- */
 const ICONS = {
   mehendi: `<svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M26 70V44c0-3 4-3 4 0v-18c0-3 4-3 4 0v-6c0-3 4-3 4 0v6-10c0-3 4-3 4 0v14-8c0-3 4-3 4 0v22l4-6c2-3 6-1 5 2l-7 14c-3 6-6 9-6 15"/><circle cx="40" cy="48" r="5"/><circle cx="40" cy="48" r="9" stroke-dasharray="2 3"/><path d="M36 30h0M44 28h0M32 58h0M48 58h0" stroke-width="3" stroke="#B3263A"/></svg>`,
@@ -187,7 +154,6 @@ const TRAVEL_ICONS = {
 };
 
 /* ---------------- Render sections ---------------- */
-$('#hero-scene').innerHTML = heroScene();
 $('#cd-skyline').innerHTML = (() => {
   const w = 1600, h = 420, r = rng(31);
   let s = `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMax slice"><defs><linearGradient id="cdsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F8EEDF" stop-opacity="0"/><stop offset=".5" stop-color="#F6D6B4"/><stop offset="1" stop-color="#EDB48C"/></linearGradient><linearGradient id="cdw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EDB48C"/><stop offset="1" stop-color="#C0757A"/></linearGradient></defs><rect width="${w}" height="${h}" fill="url(#cdsky)"/>`;
@@ -237,7 +203,6 @@ $('#venues').innerHTML = CONFIG.venues.map((v, i) => {
 $('#travel-info').innerHTML = CONFIG.travel.map((t, i) => `<div class="travel__col" data-reveal style="--i:${i}"><h3>${TRAVEL_ICONS[t.icon] || ''}${esc(t.title)}</h3><dl>${t.items.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl></div>`).join('');
 
 
-$('#sky-lanterns').innerHTML = (() => { const r = rng(9); return Array.from({ length: innerWidth < 700 ? 5 : 9 }, () => `<i style="left:${f(8 + r()*84)}%;--s:${f(7 + r()*8)}px;--t:${f(18 + r()*14)}s;--d:${f(-r()*30)}s;--dx:${f(-60 + r()*120)}px"></i>`).join(''); })();
 
 /* fairy lights + bokeh */
 $$('[data-fairy]').forEach(el => {
@@ -558,11 +523,10 @@ if (useGsap) {
   /* anything else marked for reveal gets a plain rise */
   $$('[data-reveal]').filter(el => !handled.has(el)).forEach(el => gsap.from(el, { y: 34, opacity: 0, duration: 1.1, ease: 'expo.out', clearProps: CLEAR, scrollTrigger: st(el, 'top 90%') }));
 
-  /* hero parallax on wider screens: scene sinks, lanterns lift, text drifts up and fades */
+  /* hero parallax on wider screens: the photo sinks, text drifts up and fades */
   gsap.matchMedia().add('(min-width: 800px)', () => {
     const heroST = { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true };
     gsap.to('#hero-scene', { yPercent: 14, ease: 'none', scrollTrigger: heroST });
-    gsap.to('#sky-lanterns', { yPercent: -18, ease: 'none', scrollTrigger: heroST });
     gsap.to('.hero__text', { y: -110, opacity: .15, ease: 'none', scrollTrigger: { ...heroST, start: '25% top' } });
     gsap.to('.scroll-cue', { opacity: 0, ease: 'none', scrollTrigger: { ...heroST, end: '20% top' } });
   });

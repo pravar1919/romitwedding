@@ -82,12 +82,8 @@ const markup = `<!-- ============ SVG LIBRARY ============ -->
 <main>
 <!-- ============ HERO ============ -->
 <section class="hero" id="home" aria-labelledby="hero-names">
-  <div class="hero__scene" id="hero-scene" aria-hidden="true"></div>
-  <div class="sun-glow" aria-hidden="true"></div>
-  <div class="sky-lanterns" id="sky-lanterns" aria-hidden="true"></div>
+  <div class="hero__scene" id="hero-scene" aria-hidden="true"><img src="/hero-collage.webp" alt="" width="1672" height="941" fetchpriority="high" decoding="async"></div>
   <div class="fairy" data-fairy="30" aria-hidden="true" style="top:-6px"></div>
-  <div class="lantern" style="left:7%;--t:5s" aria-hidden="true"><div class="glow"></div><svg viewBox="0 0 60 150" style="height:clamp(120px,20vh,200px);width:auto"><use href="#lanternSym"/></svg></div>
-  <div class="lantern" style="right:7%;--t:4.4s;--d:-2s" aria-hidden="true"><div class="glow"></div><svg viewBox="0 0 60 150" style="height:clamp(100px,16vh,160px);width:auto"><use href="#lanternSym"/></svg></div>
   <div class="hero__text">
     <p class="hero__kicker hero__fade d1">The wedding celebrations of</p>
     <h2 class="hero__names shimmer-maroon" id="hero-names" tabindex="-1"><span class="w" data-bind="nameA">Romit</span> <span class="w">&amp;</span> <span class="w" data-bind="nameB"><span class="cap-a">A</span>yushi</span></h2>
