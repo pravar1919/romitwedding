@@ -229,8 +229,6 @@ $('#events-grid').innerHTML = evDays.map((d, n) => `<div class="ev-day ev-day--$
   <div class="events-grid">${d.events.map(evCard).join('')}</div>
 </div>`).join('');
 
-$('#gal').innerHTML = CONFIG.gallery.map((g, i) => `<button type="button" class="${g.span || ''}" data-i="${i}" data-reveal="zoom" style="--i:${i % 4}" aria-label="Open ${esc(g.title)}"><figure style="margin:0"><div class="ph">${media(g, g.scene)}</div><figcaption>${esc(g.title)}</figcaption></figure></button>`).join('');
-
 $('#venues').innerHTML = CONFIG.venues.map((v, i) => {
   const evs = CONFIG.events.filter(e => e.venue === v.id).map(e => e.name).join(' · ');
   return `<article class="venue" data-reveal><div class="venue__pic">${v.mapEmbed ? `<iframe src="${esc(v.mapEmbed)}" title="Map to ${esc(v.name)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>` : media({ scene: v.scene, seed: 40 + i, src: v.src }, v.scene)}</div><div><h3>${esc(v.name)}</h3><p class="venue__events">${esc(evs)}</p><address>${esc(v.address)}</address><p>${esc(v.note)}</p><a class="btn btn--sm" href="${v.map || maps(`${v.name}, ${v.address}`)}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s7-6.6 7-12a7 7 0 0 0-14 0c0 5.4 7 12 7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg>Get Directions</a></div></article>`;
@@ -525,7 +523,7 @@ if (useGsap) {
   const handled = new Set();
   const own = els => { els.forEach(el => handled.add(el)); return els; };
   // CSS transitions on transform/opacity would fight GSAP's inline styles, so park them until each tween ends
-  gsap.set('[data-reveal], .gal .ph', { transition: 'none' });
+  gsap.set('[data-reveal]', { transition: 'none' });
 
   /* section headings: script title rises, ornament unfurls from the centre, caption follows */
   own($$('.sec-head')).forEach(h => gsap.timeline({ scrollTrigger: st(h, 'top 88%'), defaults: { ease: 'expo.out' } })
@@ -547,15 +545,6 @@ if (useGsap) {
     .from('.cd', { y: 40, rotateX: -80, transformPerspective: 600, opacity: 0, duration: 1.2, ease: 'expo.out', stagger: .1, clearProps: CLEAR })
     .set('.cd-grid', { clearProps: CLEAR });
   gsap.fromTo('#cd-skyline', { yPercent: 14 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '#countdown', start: 'top bottom', end: 'bottom bottom', scrub: true } });
-
-  /* gallery tiles wipe open, photos settle */
-  const tiles = own($$('.gal button'));
-  gsap.set(tiles, { clipPath: 'inset(100% 0% 0% 0%)' });
-  gsap.set(tiles.map(t => $('.ph', t)), { scale: 1.3 });
-  ScrollTrigger.batch(tiles, { start: 'top 92%', once: true, onEnter: b => {
-    gsap.to(b, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.3, ease: 'expo.inOut', stagger: .1, clearProps: CLEAR });
-    gsap.to(b.map(t => $('.ph', t)), { scale: 1, duration: 1.9, ease: 'expo.out', stagger: .1, clearProps: CLEAR });
-  } });
 
   /* venues: picture slides in from its side, details rise */
   own($$('.venue')).forEach((v, i) => gsap.timeline({ scrollTrigger: st(v), defaults: { ease: 'expo.out' } })
@@ -595,16 +584,5 @@ function cdTick(){
 }
 cdTick(); setInterval(cdTick, 1000);
 
-/* ---------------- Gallery lightbox ---------------- */
-const lb = $('#lightbox'); let lbI = 0, lbReturn = null;
-function lbShow(i){ lbI = (i + CONFIG.gallery.length) % CONFIG.gallery.length; const g = CONFIG.gallery[lbI]; $('#lb-img').innerHTML = g.src ? `<img src="${esc(g.src)}" alt="${esc(g.title)}">` : scene(g.scene, g.seed || 1, 900, 600); $('#lb-cap').textContent = g.title; }
-function lbOpen(i){ lbReturn = document.activeElement; lbShow(i); lb.hidden = false; requestAnimationFrame(() => lb.classList.add('open')); $('.lb-close', lb).focus(); }
-function lbClose(){ lb.classList.remove('open'); setTimeout(() => { lb.hidden = true; }, 500); lbReturn && lbReturn.focus(); }
-$('#gal').addEventListener('click', e => { const b = e.target.closest('button[data-i]'); if (b) lbOpen(+b.dataset.i); });
-$('.lb-close', lb).addEventListener('click', lbClose);
-$('.lb-prev', lb).addEventListener('click', () => lbShow(lbI - 1));
-$('.lb-next', lb).addEventListener('click', () => lbShow(lbI + 1));
-lb.addEventListener('click', e => { if (e.target === lb) lbClose(); });
-addEventListener('keydown', e => { if (lb.hidden) return; if (e.key === 'Escape') lbClose(); if (e.key === 'ArrowLeft') lbShow(lbI - 1); if (e.key === 'ArrowRight') lbShow(lbI + 1); });
 
 }

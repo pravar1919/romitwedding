@@ -1,7 +1,5 @@
 /* =====================================================================
    WEDDING CONFIG — every replaceable detail lives here.
-   Images: set `src` on any gallery item to a photo in /public
-   (e.g. '/gallery/1.jpg'); without it an illustrated scene is drawn instead.
    ===================================================================== */
 export const CONFIG = {
   // Public address of the site, used for link previews (WhatsApp, iMessage, etc.)
@@ -36,17 +34,6 @@ export const CONFIG = {
     { id: 'ghudchadi', name: 'Ghudchadi', tagline: 'The groom rides out on his ghodi', start: '2026-11-30T10:00:00+05:30', venue: 'sagar', icon: 'ghodi' },
     { id: 'phere', name: 'Phere', tagline: 'Seven vows around the sacred fire', start: '2026-11-30T13:15:00+05:30', venue: 'sagar', icon: 'mandap' },
     { id: 'reception', name: 'Reception', tagline: 'Dinner, toasts, and a last dance', start: '2026-11-30T19:00:00+05:30', venue: 'sagar', icon: 'reception' },
-  ],
-  gallery: [
-    { title: 'The lake at dusk', span: 'big', scene: 'palace', seed: 11 },
-    { title: 'Marigold mornings', span: 'tall', scene: 'roses', seed: 5 },
-    { title: 'Garden lights', scene: 'lanterns', seed: 8 },
-    { title: 'Moonrise over the water', scene: 'night', seed: 13 },
-    { title: 'Under the mandap', span: 'wide', scene: 'mandap', seed: 6 },
-    { title: 'First light', scene: 'dawn', seed: 21 },
-    { title: 'Rose petals', scene: 'roses', seed: 17 },
-    { title: 'The palace by night', span: 'wide', scene: 'night', seed: 4 },
-    { title: 'Sangeet evening', span: 'wide', scene: 'lanterns', seed: 19 },
   ],
   travel: [
     { title: 'Getting here', icon: 'plane', items: [

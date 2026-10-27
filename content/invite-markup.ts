@@ -71,7 +71,6 @@ const markup = `<!-- ============ SVG LIBRARY ============ -->
   <ul class="nav__links" id="nav-links">
     <li><a href="#home">Home</a></li>
     <li><a href="#events">Events</a></li>
-    <li><a href="#gallery">Gallery</a></li>
     <li><a href="#travel">Travel</a></li>
   </ul>
   <div class="nav__tools">
@@ -146,20 +145,6 @@ const markup = `<!-- ============ SVG LIBRARY ============ -->
   <div class="cd-skyline" id="cd-skyline" aria-hidden="true"></div>
 </section>
 
-<!-- ============ GALLERY ============ -->
-<section class="section paper" id="gallery" aria-labelledby="gallery-title" style="background-color:var(--ivory)">
-  <div class="flora flora--tl" aria-hidden="true"><img src="/flora-tl.webp" alt="" decoding="async" loading="lazy"></div>
-  <div class="flora flora--tr" aria-hidden="true"><img src="/flora-tl.webp" alt="" decoding="async" loading="lazy"></div>
-  <div class="wrap">
-    <header class="sec-head" data-reveal>
-      <h2 id="gallery-title">Gallery</h2>
-      <svg class="divider" viewBox="0 0 220 22" aria-hidden="true"><use href="#ornament"/></svg>
-      <p class="caps">Moments that matter</p>
-    </header>
-    <div class="gal" id="gal"></div>
-  </div>
-</section>
-
 <!-- ============ VENUE & TRAVEL ============ -->
 <section class="section paper" id="travel" aria-labelledby="travel-title">
   <div class="flora flora--br" aria-hidden="true"><img src="/flora-br.webp" alt="" decoding="async" loading="lazy"></div>
@@ -191,12 +176,6 @@ const markup = `<!-- ============ SVG LIBRARY ============ -->
   </div>
 </footer>
 
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Gallery image" hidden>
-  <button class="lb-btn lb-close" type="button" aria-label="Close">×</button>
-  <button class="lb-btn lb-prev" type="button" aria-label="Previous">‹</button>
-  <figure><div class="lb-img" id="lb-img"></div><figcaption id="lb-cap"></figcaption></figure>
-  <button class="lb-btn lb-next" type="button" aria-label="Next">›</button>
-</div>
 `;
 
 export default markup;
