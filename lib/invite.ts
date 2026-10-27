@@ -56,6 +56,7 @@ $$('[data-bind="nameA"], [data-bind="nameB"], [data-bind="initialA"], [data-bind
   const t = el.textContent; if (t[0] === 'A') el.innerHTML = `<span class="cap-a">A</span>${esc(t.slice(1))}`;
 });
 const maps = q => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q);
+const gcal = (title, s, e, loc) => { const z = d => d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,''); return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent(title) + '&dates=' + z(s) + '/' + z(e) + '&location=' + encodeURIComponent(loc); };
 const venueById = Object.fromEntries(CONFIG.venues.map(v => [v.id, v]));
 
 /* ---------------- Illustration helpers ---------------- */
@@ -171,6 +172,7 @@ $('#cd-skyline').classList.add('hero__scene'); $('#cd-skyline').style.position =
 /* events are grouped by day, each day in its own colour (see .ev-day--N) */
 const evCard = (e, i) => {
   const s = D(e.start), v = venueById[e.venue] || {};
+  const en = e.end ? D(e.end) : new Date(s.getTime() + 2 * 3600e3); // events without an end time go in the calendar as two hours
   return `<article class="ev" data-reveal style="--i:${i}">
     <span class="ev__finial" aria-hidden="true"></span>
     <div class="ev__icon" aria-hidden="true">${ICONS[e.icon] || ''}</div>
@@ -179,6 +181,7 @@ const evCard = (e, i) => {
     <p class="ev__when">${fmt(s, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })}<br>${time(s)}${e.end ? ` – ${time(D(e.end))}` : ''}</p>
     <p class="ev__venue">${esc(v.name || '')}</p>
     <div class="ev__actions">
+      <a class="btn btn--sm" href="${gcal(`${e.name} · ${A} & ${B}`, s, en, `${v.name}, ${v.address}`)}" target="_blank" rel="noopener">Add to calendar</a>
       <a class="btn btn--sm btn--ghost" href="${v.map || maps(`${v.name}, ${v.address}`)}" target="_blank" rel="noopener">Directions</a>
     </div>
   </article>`;

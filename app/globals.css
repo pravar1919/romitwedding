@@ -264,6 +264,7 @@ section{position:relative;overflow:hidden}
 .ev__actions{display:flex;flex-direction:column;gap:8px;align-items:center;margin-top:auto}
 .ev__actions .btn{width:100%;max-width:190px;justify-content:center}
 .ev__actions .btn--ghost{border-color:var(--ev-line,rgba(110,20,35,.35));color:var(--ev-ink,inherit)}
+.ev__actions .btn:not(.btn--ghost){background:var(--ev-ink,var(--maroon));border-color:var(--ev-ink,var(--maroon));color:#FFF8EC}
 
 /* ---------- COUNTDOWN ---------- */
 .countdown{padding:clamp(110px,14vw,170px) 0 0;text-align:center}
