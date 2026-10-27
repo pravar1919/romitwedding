@@ -315,7 +315,7 @@ fx.start();
 const music = (() => {
   let player, ready = false, on = false;
   const btn = $('#music-btn');
-  const id = CONFIG.song.youtubeId;
+  const id = CONFIG.song.youtubeId, start = CONFIG.song.start || 0;
   btn.title = CONFIG.song.title;
   /* the player is built ahead of time so the first tap can start it inside the gesture (iOS refuses play() later) */
   function load(){
@@ -329,10 +329,14 @@ const music = (() => {
       prev && prev();
       player = new YT.Player('yt-song', {
         host: 'https://www.youtube-nocookie.com', videoId: id, width: 200, height: 200,
-        playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: id, playsinline: 1, rel: 0 },
+        playerVars: { autoplay: 0, controls: 0, start, playsinline: 1, rel: 0 },
         events: {
           onReady: () => { ready = true; player.setVolume(70); if (on) player.playVideo(); },
-          onStateChange: e => { if (e.data === YT.PlayerState.PLAYING && !on) player.pauseVideo(); },
+          onStateChange: e => {
+            if (e.data === YT.PlayerState.PLAYING && !on) player.pauseVideo();
+            /* loop back to where the singing starts, not the instrumental intro */
+            if (e.data === YT.PlayerState.ENDED && on) { player.seekTo(start, true); player.playVideo(); }
+          },
         },
       });
     };
