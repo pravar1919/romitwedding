@@ -52,7 +52,7 @@ const binds = {
   ceremonyLabel: `Until the pheras · ${fmt(ceremony, { weekday: 'long', day: 'numeric', month: 'long' })}, ${time(ceremony).toLowerCase()} ${CONFIG.tzLabel}`,
 };
 $$('[data-bind]').forEach(el => { const v = binds[el.dataset.bind]; if (v != null) el.textContent = v; });
-$$('[data-bind="nameA"], [data-bind="nameB"], [data-bind="initialA"], [data-bind="initialB"]').forEach(el => {
+$$('[data-bind="nameA"], [data-bind="nameB"], [data-bind="initialA"], [data-bind="initialB"], [data-bind="familyNameA"], [data-bind="familyNameB"]').forEach(el => {
   const t = el.textContent; if (t[0] === 'A') el.innerHTML = `<span class="cap-a">A</span>${esc(t.slice(1))}`;
 });
 const maps = q => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q);
@@ -408,10 +408,12 @@ function monoReset(done){
 }
 /* on phones the big names are hidden, so the letters fly from "Romit Gupta" / "Ayushi Gupta" instead */
 function rangeAt(el, start, end){
-  const n = el && el.firstChild;
-  if (!n || n.nodeType !== 3 || n.length < end) return null;
-  const r = document.createRange(); r.setStart(n, start); r.setEnd(n, end);
-  return r;
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+  for (let at = 0; walker.nextNode(); at += walker.currentNode.length) {
+    const n = walker.currentNode;
+    if (start >= at && end <= at + n.length) { const r = document.createRange(); r.setStart(n, start - at); r.setEnd(n, end - at); return r; }
+  }
+  return null;
 }
 function letterRange(el, fromEnd){
   const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), nodes = [];
@@ -460,6 +462,7 @@ function openInvite(){
   if (intro.classList.contains('opening')) return;
   intro.classList.add('opening');
   track('open');
+  music.toggle(true);
   monoReset(true);
   if (!useGsap) root.classList.add('reveal-ready');
   const b = $('#open-invite').getBoundingClientRect();
