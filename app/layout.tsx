@@ -3,8 +3,8 @@ import { CONFIG } from "@/lib/config";
 import { shareDescription, shareImage, shareTitle } from "@/lib/share";
 import "./globals.css";
 
-const title = `${CONFIG.couple.a} & ${CONFIG.couple.b} · ${CONFIG.hashtag}`;
-const description = `You're invited to the wedding of ${CONFIG.couple.a} & ${CONFIG.couple.b} · 29–30 November 2026 · ${CONFIG.city}`;
+const title = `${CONFIG.couple.a} & ${CONFIG.couple.b} · Wedding Invitation · ${CONFIG.hashtag}`;
+const description = `Wedding invitation: you're invited to the wedding of ${CONFIG.couple.a} & ${CONFIG.couple.b} · 29–30 November 2026 · ${CONFIG.city}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(CONFIG.siteUrl),

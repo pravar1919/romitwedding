@@ -396,23 +396,24 @@ function playMonogram(){
     const sources = [letterRange($('[data-bind="nameA"]', names), false), letterRange($('[data-bind="nameB"]', names), true)];
     const targets = $$('.tag-part', tagEl);
     if (sources.some(r => !r)) return monoReset(true);
+    const riseY = new DOMMatrix(getComputedStyle(tagEl).transform).m42; // the tag may still be rising into place
     monoTl = gsap.timeline({ onComplete: () => monoReset(true) });
     sources.forEach((range, i) => {
-      const s = range.getBoundingClientRect(), t = targets[i].getBoundingClientRect();
+      const s = range.getBoundingClientRect(), r = targets[i].getBoundingClientRect(), t = { left: r.left, width: r.width, height: r.height, top: r.top - riseY };
       const fly = document.createElement('span');
       fly.className = 'tag-fly'; fly.setAttribute('aria-hidden', 'true'); fly.textContent = range.toString();
       Object.assign(fly.style, { left: s.left + 'px', top: s.top + 'px', width: s.width + 'px', height: s.height + 'px', lineHeight: s.height + 'px', fontSize });
       intro.appendChild(fly);
       const dx = (t.left + t.width / 2) - (s.left + s.width / 2), dy = (t.top + t.height / 2) - (s.top + s.height / 2);
-      const k = Math.max(.25, Math.min(1, t.height / s.height * 1.15)), at = i * .35;
+      const k = Math.max(.25, Math.min(1, t.height / s.height * 1.15)), at = i * .25;
       monoTl
-        .fromTo(fly, { opacity: 0, scale: 1 }, { opacity: 1, scale: 1.18, y: -14, duration: .55, ease: 'power2.out' }, at)
-        .to(fly, { keyframes: { x: [0, dx * .35, dx], y: [-14, dy * .35 - 40, dy], scale: [1.18, (1.18 + k) / 2, k], easeEach: 'none' }, duration: 1.2, ease: 'power2.inOut' }, at + .65)
-        .to(fly, { opacity: 0, duration: .3, ease: 'power1.in' }, at + 1.6)
+        .fromTo(fly, { opacity: 0, scale: 1 }, { opacity: 1, scale: 1.18, y: -14, duration: .4, ease: 'power2.out' }, at)
+        .to(fly, { keyframes: { x: [0, dx * .35, dx], y: [-14, dy * .35 - 40, dy], scale: [1.18, (1.18 + k) / 2, k], easeEach: 'none' }, duration: .95, ease: 'power2.inOut' }, at + .45)
+        .to(fly, { opacity: 0, duration: .25, ease: 'power1.in' }, at + 1.2)
         .fromTo(targets[i], { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: .5, ease: 'back.out(2.2)',
-          onStart: () => fx.sparkle(t.left + t.width / 2, t.top + t.height / 2, 14, 1.4) }, at + 1.6);
+          onStart: () => fx.sparkle(t.left + t.width / 2, t.top + t.height / 2, 14, 1.4) }, at + 1.2);
     });
-  }, 2500);
+  }, 1400);
 }
 playMonogram();
 function openInvite(){

@@ -13,8 +13,8 @@ for (const e of CONFIG.events) {
 
 const venue = CONFIG.venues[0];
 
-export const shareTitle = `${CONFIG.couple.a} weds ${CONFIG.couple.b} · 29–30 November 2026`;
+export const shareTitle = `Wedding Invitation · ${CONFIG.couple.a} weds ${CONFIG.couple.b} · 29–30 November 2026`;
 export const shareDescription =
-  `Join us at ${venue.name}, ${CONFIG.city.split(",")[0]}. ` +
+  `You are warmly invited to our wedding celebrations — join us at ${venue.name}, ${CONFIG.city.split(",")[0]}. ` +
   [...days].map(([day, items]) => `${day}: ${items.join(", ")}`).join(" · ");
 export const shareImage = { url: "/og-wedding-v6.jpg", secureUrl: `${CONFIG.siteUrl}/og-wedding-v6.jpg`, type: "image/jpeg", width: 800, height: 420, alt: `${CONFIG.couple.a} & ${CONFIG.couple.b} in wedding attire` };
