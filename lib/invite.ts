@@ -202,7 +202,8 @@ $('#cd-skyline').innerHTML = (() => {
 // shimmer animation + twinkle classes inside countdown use the hero keyframes
 $('#cd-skyline').classList.add('hero__scene'); $('#cd-skyline').style.position = 'relative';
 
-$('#events-grid').innerHTML = CONFIG.events.map((e, i) => {
+/* events are grouped by day, each day in its own colour (see .ev-day--N) */
+const evCard = (e, i) => {
   const s = D(e.start), v = venueById[e.venue] || {};
   return `<article class="ev" data-reveal style="--i:${i}">
     <span class="ev__finial" aria-hidden="true"></span>
@@ -215,7 +216,18 @@ $('#events-grid').innerHTML = CONFIG.events.map((e, i) => {
       <a class="btn btn--sm btn--ghost" href="${v.map || maps(`${v.name}, ${v.address}`)}" target="_blank" rel="noopener">Directions</a>
     </div>
   </article>`;
-}).join('');
+};
+const evDays = [];
+CONFIG.events.forEach(e => {
+  const key = fmt(D(e.start), { year: 'numeric', month: '2-digit', day: '2-digit' });
+  let day = evDays.find(d => d.key === key);
+  if (!day) evDays.push(day = { key, date: D(e.start), events: [] });
+  day.events.push(e);
+});
+$('#events-grid').innerHTML = evDays.map((d, n) => `<div class="ev-day ev-day--${n % 2 + 1}">
+  <h3 class="ev-day__head" data-reveal><span class="ev-day__num">Day ${n + 1}</span><span class="ev-day__date">${fmt(d.date, { weekday: 'long', day: 'numeric', month: 'long' })}</span></h3>
+  <div class="events-grid">${d.events.map(evCard).join('')}</div>
+</div>`).join('');
 
 $('#gal').innerHTML = CONFIG.gallery.map((g, i) => `<button type="button" class="${g.span || ''}" data-i="${i}" data-reveal="zoom" style="--i:${i % 4}" aria-label="Open ${esc(g.title)}"><figure style="margin:0"><div class="ph">${media(g, g.scene)}</div><figcaption>${esc(g.title)}</figcaption></figure></button>`).join('');
 

@@ -121,7 +121,7 @@ const markup = `<!-- ============ SVG LIBRARY ============ -->
       <svg class="divider" viewBox="0 0 220 22" aria-hidden="true"><use href="#ornament"/></svg>
       <p class="caps">Join us for our special celebrations</p>
     </header>
-    <div class="events-grid" id="events-grid"></div>
+    <div class="ev-days" id="events-grid"></div>
   </div>
 </section>
 
