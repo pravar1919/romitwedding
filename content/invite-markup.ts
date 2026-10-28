@@ -40,8 +40,8 @@ const markup = `<!-- ============ SVG LIBRARY ============ -->
 
 <!-- ============ INVITATION OPENING ============ -->
 <div class="intro" id="intro" role="dialog" aria-modal="true" aria-labelledby="intro-names">
-  <div class="intro__door intro__door--l dark"></div>
-  <div class="intro__door intro__door--r dark"></div>
+  <div class="intro__door intro__door--l"></div>
+  <div class="intro__door intro__door--r"></div>
   <div class="intro__light"></div>
   <div class="intro__arch" aria-hidden="true">
     <svg viewBox="0 0 1000 1000" preserveAspectRatio="none"><g fill="none" stroke="#C59B4E" vector-effect="non-scaling-stroke"><path vector-effect="non-scaling-stroke" stroke-width="1.5" d="M60 1000V330C60 200 250 150 380 110C440 90 480 50 500 0C520 50 560 90 620 110C750 150 940 200 940 330V1000"/><path vector-effect="non-scaling-stroke" stroke-width=".8" opacity=".6" d="M90 1000V340C90 225 270 175 395 135C450 115 485 80 500 40C515 80 550 115 605 135C730 175 910 225 910 340V1000"/></g></svg>
@@ -50,12 +50,14 @@ const markup = `<!-- ============ SVG LIBRARY ============ -->
   <div class="flora flora--tr" aria-hidden="true"><img src="/flora-tl.webp" alt="" decoding="async"></div>
   <div class="flora flora--bl" aria-hidden="true"><img src="/flora-br.webp" alt="" decoding="async"></div>
   <div class="flora flora--br" aria-hidden="true"><img src="/flora-br.webp" alt="" decoding="async"></div>
+  <img class="intro__fig intro__fig--a" src="/art/groom.webp" alt="" width="255" height="570" decoding="async" aria-hidden="true">
+  <img class="intro__fig intro__fig--b" src="/art/bride.webp" alt="" width="314" height="570" decoding="async" aria-hidden="true">
   <div class="lantern" style="left:14%;--t:4.6s" aria-hidden="true"><div class="glow"></div><svg viewBox="0 0 60 150" style="height:clamp(130px,22vh,210px);width:auto"><use href="#lanternSym"/></svg></div>
   <div class="lantern" style="right:14%;--t:5.4s;--d:-1s" aria-hidden="true"><div class="glow"></div><svg viewBox="0 0 60 150" style="height:clamp(110px,17vh,170px);width:auto"><use href="#lanternSym"/></svg></div>
   <div class="intro__card">
     <div class="ganesh rise" style="--i:0"><span class="ganesh__halo" aria-hidden="true"></span><div class="ganesh__img" id="ganesh"></div><p class="ganesh__mantra" lang="hi">॥ श्री गणेशाय नमः ॥</p></div>
     <p class="lead rise" style="--i:1">You are cordially invited<br>to the wedding of</p>
-    <h1 class="intro__names shimmer-gold rise" style="--i:2" id="intro-names"><span data-bind="nameA">Romit</span> <span class="amp">&amp;</span> <span data-bind="nameB"><span class="cap-a">A</span>yushi</span></h1>
+    <h1 class="intro__names shimmer-maroon rise" style="--i:2" id="intro-names"><span data-bind="nameA">Romit</span> <span class="amp">&amp;</span> <span data-bind="nameB"><span class="cap-a">A</span>yushi</span></h1>
     <div class="intro__families rise" style="--i:3"><p><span class="fam-name" data-bind="familyNameA">Romit Gupta</span><span class="fam-parents" data-bind="familyParentsA">S/o Ranjana &amp; Radhey Shyam Gupta</span></p><span class="fam-weds" aria-hidden="true">Weds</span><p><span class="fam-name" data-bind="familyNameB">Ayushi Gupta</span><span class="fam-parents" data-bind="familyParentsB">D/o Usha Gupta &amp; Mahaveer Prasad Gupta</span></p></div>
     <p class="intro__date rise" style="--i:3"><span data-bind="dateLong">30 November 2026</span><br><span data-bind="cityCaps">Alwar, Rajasthan</span></p>
     <p class="intro__tag rise" style="--i:4" data-bind="hashtag">#ROHI</p>
@@ -70,6 +72,7 @@ const markup = `<!-- ============ SVG LIBRARY ============ -->
   <a class="nav__mono" href="#home" aria-label="Back to top"><span data-bind="initialA">R</span><i></i><span data-bind="initialB"><span class="cap-a">A</span></span></a>
   <ul class="nav__links" id="nav-links">
     <li><a href="#home">Home</a></li>
+    <li><a href="#story">Our Story</a></li>
     <li><a href="#events">Events</a></li>
     <li><a href="#travel">Travel</a></li>
   </ul>
@@ -82,37 +85,47 @@ const markup = `<!-- ============ SVG LIBRARY ============ -->
 <main>
 <!-- ============ HERO ============ -->
 <section class="hero" id="home" aria-labelledby="hero-names">
-  <div class="hero__scene" id="hero-scene" aria-hidden="true"><img src="/h-a4965d10.webp" alt="" draggable="false" width="1672" height="941" fetchpriority="high" decoding="async"></div>
-  <div class="fairy" data-fairy="30" aria-hidden="true" style="top:-6px"></div>
+  <div class="toran" aria-hidden="true"></div>
+  <div class="hero__stage">
+  <img class="hero__fig hero__fig--a" src="/art/groom.webp" alt="Illustration of the groom in an ivory sherwani and safa" width="255" height="570" fetchpriority="high" decoding="async">
   <div class="hero__text">
     <p class="hero__kicker hero__fade d1">The wedding celebrations of</p>
     <h2 class="hero__names shimmer-maroon" id="hero-names" tabindex="-1"><span class="w" data-bind="nameA">Romit</span> <span class="w">&amp;</span> <span class="w" data-bind="nameB"><span class="cap-a">A</span>yushi</span></h2>
     <p class="hero__sub hero__fade d2"><span>A journey of love</span></p>
     <p class="hero__sub hero__fade d2"><span data-bind="dateRangeCaps">29 – 30 Nov 2026</span><span class="sep"></span><span data-bind="cityCaps">Alwar, Rajasthan</span></p>
-    <svg class="divider hero__fade d3" viewBox="0 0 220 22" aria-hidden="true" style="color:#9C5A3A"><use href="#ornament"/></svg>
+    <svg class="divider hero__fade d3" viewBox="0 0 220 22" aria-hidden="true"><use href="#ornament"/></svg>
     <p class="hero__line hero__fade d3" data-bind="heroLine">Join us in the Aravalli hills for haldi, music, and the seven vows.</p>
     <div class="hero__cta hero__fade d4"><a class="btn" href="#events">See the events</a><a class="btn btn--ghost" href="#travel">Venue &amp; directions</a></div>
+  </div>
+  <img class="hero__fig hero__fig--b" src="/art/bride.webp" alt="Illustration of the bride in a blush lehenga" width="314" height="570" fetchpriority="high" decoding="async">
   </div>
   <a class="scroll-cue" href="#events"><span class="mouse"></span>Scroll to explore</a>
 </section>
 
-<!-- ============ CREST ============ -->
-<section class="crest paper" id="crest" aria-label="Romit weds Ayushi">
+<!-- ============ OUR STORY: the couple's photos framed, the ROHI seal pinned to it ============ -->
+<section class="crest paper" id="story" aria-labelledby="story-title">
   <div class="flora flora--tl" aria-hidden="true"><img src="/flora-tl.webp" alt="" decoding="async" loading="lazy"></div>
   <div class="flora flora--tr" aria-hidden="true"><img src="/flora-tl.webp" alt="" decoding="async" loading="lazy"></div>
   <div class="wrap">
-    <div class="crest__logo" id="crest-logo" data-reveal="zoom"><img src="/rohi-logo.jpg" alt="Romit weds Ayushi monogram, #ROHI" width="900" height="900" loading="lazy"><span class="crest__shine" aria-hidden="true"></span></div>
+    <header class="sec-head" data-reveal>
+      <h2 id="story-title">Our Story</h2>
+      <svg class="divider" viewBox="0 0 220 22" aria-hidden="true"><use href="#ornament"/></svg>
+      <p class="caps">A journey of love</p>
+    </header>
+    <figure class="story" data-reveal="zoom">
+      <div class="story__photo" aria-hidden="true"><img src="/h-a4965d10.webp" alt="" draggable="false" width="1672" height="941" loading="lazy" decoding="async"></div>
+      <div class="crest__logo" id="crest-logo"><img src="/rohi-logo.jpg" alt="Romit weds Ayushi monogram, #ROHI" width="900" height="900" loading="lazy"><span class="crest__shine" aria-hidden="true"></span></div>
+    </figure>
     <p class="crest__line" data-reveal data-bind="tagline">Two families, two days, one promise in the Aravalli hills.</p>
   </div>
 </section>
 
 <!-- ============ EVENTS ============ -->
-<section class="section dark" id="events" aria-labelledby="events-title">
-  <div class="fairy" data-fairy="22" aria-hidden="true"></div>
-  <div class="bokeh" data-bokeh="16" aria-hidden="true"></div>
+<section class="section blush" id="events" aria-labelledby="events-title">
+  <div class="toran" aria-hidden="true"></div>
   <div class="wrap">
     <header class="sec-head" data-reveal>
-      <h2 id="events-title" class="shimmer-gold">Wedding Events</h2>
+      <h2 id="events-title">Wedding Events</h2>
       <svg class="divider" viewBox="0 0 220 22" aria-hidden="true"><use href="#ornament"/></svg>
       <p class="caps">Join us for our special celebrations</p>
     </header>
@@ -138,7 +151,7 @@ const markup = `<!-- ============ SVG LIBRARY ============ -->
     </div>
     <p class="cd-label" data-reveal data-bind="ceremonyLabel"></p>
   </div>
-  <div class="cd-skyline" id="cd-skyline" aria-hidden="true"></div>
+  <div class="flora flora--bl" aria-hidden="true"><img src="/flora-br.webp" alt="" decoding="async" loading="lazy"></div>
 </section>
 
 <!-- ============ VENUE & TRAVEL ============ -->
@@ -159,7 +172,7 @@ const markup = `<!-- ============ SVG LIBRARY ============ -->
 
 <!-- ============ FAREWELL ============ -->
 <footer class="farewell dark" id="farewell">
-  <div class="fairy" data-fairy="28" aria-hidden="true"></div>
+  <div class="toran" aria-hidden="true"></div>
   <div class="bokeh" data-bokeh="12" aria-hidden="true"></div>
   <div class="wrap">
     <div class="logo-card" data-reveal><img src="/rohi-logo.jpg" alt="Romit weds Ayushi monogram, #ROHI" width="900" height="900" loading="lazy"></div>

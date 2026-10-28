@@ -155,34 +155,24 @@ const TRAVEL_ICONS = {
 };
 
 /* ---------------- Render sections ---------------- */
-$('#cd-skyline').innerHTML = (() => {
-  const w = 1600, h = 420, r = rng(31);
-  let s = `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMax slice"><defs><linearGradient id="cdsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F8EEDF" stop-opacity="0"/><stop offset=".5" stop-color="#F6D6B4"/><stop offset="1" stop-color="#EDB48C"/></linearGradient><linearGradient id="cdw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EDB48C"/><stop offset="1" stop-color="#C0757A"/></linearGradient></defs><rect width="${w}" height="${h}" fill="url(#cdsky)"/>`;
-  s += hills(r, w, 330, 60, 8, '#E2A797');
-  s += town(r, 0, 520, 340, '#C27F7E', '#FFE6B0') + town(r, 1100, 1600, 340, '#C27F7E', '#FFE6B0');
-  s += palace(rng(44), 520, 340, 560, 230, '#B0606A', '#FFE6B0', false);
-  s += `<rect y="338" width="${w}" height="${h-338}" fill="url(#cdw)"/>`;
-  for (let i = 0; i < 8; i++) s += `<line x1="${f(560+r()*480)}" x2="${f(640+r()*480)}" y1="${350+i*9}" y2="${350+i*9}" stroke="#FFF4D6" stroke-width="1.2" opacity=".5"/>`;
-  s += rosesCluster(90, 400, 1.6) + rosesCluster(1510, 400, 1.6) + rosesCluster(300, 420, 1) + rosesCluster(1300, 420, 1);
-  return s + '</svg>';
-})();
-// shimmer animation + twinkle classes inside countdown use the hero keyframes
-$('#cd-skyline').classList.add('hero__scene'); $('#cd-skyline').style.position = 'relative';
-
 /* events are grouped by day, each day in its own colour (see .ev-day--N) */
 const evCard = (e, i) => {
   const s = D(e.start), v = venueById[e.venue] || {};
   const en = e.end ? D(e.end) : new Date(s.getTime() + 2 * 3600e3); // events without an end time go in the calendar as two hours
-  return `<article class="ev" data-reveal style="--i:${i}">
-    <span class="ev__finial" aria-hidden="true"></span>
-    <div class="ev__icon" aria-hidden="true">${ICONS[e.icon] || ''}</div>
-    <h3>${esc(e.name)}</h3>
-    <p class="ev__tag">${esc(e.tagline)}</p>
-    <p class="ev__when">${fmt(s, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })}<br>${time(s)}${e.end ? ` – ${time(D(e.end))}` : ''}</p>
-    <p class="ev__venue">${esc(v.name || '')}</p>
-    <div class="ev__actions">
-      <a class="btn btn--sm" href="${gcal(`${e.name} · ${A} & ${B}`, s, en, `${v.name}, ${v.address}`)}" target="_blank" rel="noopener">Add to calendar</a>
-      <a class="btn btn--sm btn--ghost" href="${v.map || maps(`${v.name}, ${v.address}`)}" target="_blank" rel="noopener">Directions</a>
+  // events with an illustration use it as the card's backdrop: the scene runs full width and fades into a blurred copy of itself behind the details; the rest get their line icon in a gold medallion
+  const art = e.art, wide = art && art.w > art.h;
+  return `<article class="ev${art ? ` ev--art${wide ? ' ev--wide' : ''}` : ''}" data-reveal style="--i:${i};--row:${i + 1}${art ? `;--art:url('${esc(art.src)}')` : ''}">
+    <span class="ev__dot" aria-hidden="true"></span>
+    ${art ? `<div class="ev__bg" aria-hidden="true"></div><img class="ev__scene" src="${esc(art.src)}" alt="${esc(art.alt)}" width="${art.w}" height="${art.h}" loading="lazy" decoding="async">` : `<div class="ev__icon" aria-hidden="true">${ICONS[e.icon] || ''}</div>`}
+    <div class="ev__body">
+      <h3>${esc(e.name)}</h3>
+      <p class="ev__tag">${esc(e.tagline)}</p>
+      <p class="ev__when">${fmt(s, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })}<span class="sep"></span>${time(s)}${e.end ? ` – ${time(D(e.end))}` : ''}</p>
+      <p class="ev__venue">${esc(v.name || '')}</p>
+      <div class="ev__actions">
+        <a class="btn btn--sm" href="${gcal(`${e.name} · ${A} & ${B}`, s, en, `${v.name}, ${v.address}`)}" target="_blank" rel="noopener">Add to calendar</a>
+        <a class="btn btn--sm btn--ghost" href="${v.map || maps(`${v.name}, ${v.address}`)}" target="_blank" rel="noopener">Directions</a>
+      </div>
     </div>
   </article>`;
 };
@@ -195,7 +185,7 @@ CONFIG.events.forEach(e => {
 });
 $('#events-grid').innerHTML = evDays.map((d, n) => `<div class="ev-day ev-day--${n % 2 + 1}">
   <h3 class="ev-day__head" data-reveal><span class="ev-day__num">Day ${n + 1}</span><span class="ev-day__date">${fmt(d.date, { weekday: 'long', day: 'numeric', month: 'long' })}</span></h3>
-  <div class="events-grid">${d.events.map(evCard).join('')}</div>
+  <div class="timeline">${d.events.map(evCard).join('')}</div>
 </div>`).join('');
 
 $('#venues').innerHTML = CONFIG.venues.map((v, i) => {
@@ -507,12 +497,11 @@ if (useGsap) {
   gsap.set(own($$('.ev')), { y: 80, rotateX: -14, transformPerspective: 900, transformOrigin: '50% 100%', opacity: 0 });
   ScrollTrigger.batch('.ev', { start: 'top 90%', once: true, onEnter: b => gsap.to(b, { y: 0, rotateX: 0, opacity: 1, duration: 1.4, ease: 'expo.out', stagger: .12, clearProps: CLEAR }) });
 
-  /* countdown tiles flip up, skyline drifts */
+  /* countdown tiles flip up */
   own([$('.cd-grid')]);
   gsap.timeline({ scrollTrigger: st('.cd-grid') })
     .from('.cd', { y: 40, rotateX: -80, transformPerspective: 600, opacity: 0, duration: 1.2, ease: 'expo.out', stagger: .1, clearProps: CLEAR })
     .set('.cd-grid', { clearProps: CLEAR });
-  gsap.fromTo('#cd-skyline', { yPercent: 14 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '#countdown', start: 'top bottom', end: 'bottom bottom', scrub: true } });
 
   /* venues: picture slides in from its side, details rise */
   own($$('.venue')).forEach((v, i) => gsap.timeline({ scrollTrigger: st(v), defaults: { ease: 'expo.out' } })
@@ -526,10 +515,11 @@ if (useGsap) {
   /* anything else marked for reveal gets a plain rise */
   $$('[data-reveal]').filter(el => !handled.has(el)).forEach(el => gsap.from(el, { y: 34, opacity: 0, duration: 1.1, ease: 'expo.out', clearProps: CLEAR, scrollTrigger: st(el, 'top 90%') }));
 
-  /* hero parallax on wider screens: the photo sinks, text drifts up and fades */
+  /* hero parallax on wider screens: the couple sink at different speeds, text drifts up and fades */
   gsap.matchMedia().add('(min-width: 800px)', () => {
     const heroST = { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true };
-    gsap.to('#hero-scene', { yPercent: 14, ease: 'none', scrollTrigger: heroST });
+    gsap.to('.hero__fig--a', { yPercent: 10, ease: 'none', scrollTrigger: heroST });
+    gsap.to('.hero__fig--b', { yPercent: 16, ease: 'none', scrollTrigger: heroST });
     gsap.to('.hero__text', { y: -110, opacity: .15, ease: 'none', scrollTrigger: { ...heroST, start: '25% top' } });
     gsap.to('.scroll-cue', { opacity: 0, ease: 'none', scrollTrigger: { ...heroST, end: '20% top' } });
   });
