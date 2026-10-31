@@ -61,9 +61,9 @@ const markup = `<!-- ============ SVG LIBRARY ============ -->
     <div class="families intro__families rise" style="--i:3"><p><span class="fam-name" data-bind="familyNameA">Romit Gupta</span></p><span class="fam-weds" aria-hidden="true">Weds</span><p><span class="fam-name" data-bind="familyNameB">Ayushi Gupta</span></p></div>
     <p class="intro__date rise" style="--i:3"><span data-bind="dateLong">30 November 2026</span><br><span data-bind="cityCaps">Alwar, Rajasthan</span></p>
     <p class="intro__tag rise" style="--i:4" data-bind="hashtag">#ROHI</p>
-    <p class="intro__firm rise" style="--i:4"><span class="firm-name" data-bind="firmName">Gujarmal Ghasiram</span><span class="firm-place" data-bind="firmPlace">Clock Tower, Alwar</span></p>
+    <p class="intro__firm rise" style="--i:4"><span class="firm-name" data-bind="firmName">Gujarmal Ghasi Ram</span><span class="firm-place" data-bind="firmPlace">Clock Tower, Alwar</span></p>
     <svg class="divider rise" style="--i:4" viewBox="0 0 220 22" aria-hidden="true"><use href="#ornament"/></svg>
-    <button class="btn intro__open rise" style="--i:5" id="open-invite" type="button">Open Your Invitation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+    <div class="open-wrap rise" style="--i:5"><button class="btn intro__open" id="open-invite" type="button">Open Your Invitation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button><span class="open-sparkles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></div>
   </div>
 </div>
 

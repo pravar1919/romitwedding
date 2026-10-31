@@ -185,15 +185,35 @@ html.intro-open main,html.intro-open footer{visibility:hidden}
   .intro__families .fam-weds{margin:4px 0 2px}
   .intro__date{line-height:1.7}
   .intro__firm{margin:8px auto 0;padding:6px 18px}
-  .intro__open{margin-top:12px}
+  .open-wrap{margin-top:12px}
 }
 .intro__tag{font-family:var(--f-caps);font-weight:600;letter-spacing:.32em;font-size:clamp(1.05rem,2.6vw,1.25rem);color:var(--gold-dk);margin:10px 0 0}
 .intro__tag .tag-part{display:inline-block;font-weight:700;color:var(--rose);text-shadow:0 0 10px rgba(242,182,48,.6);animation:tagGlow 2.4s ease-in-out infinite alternate}
 @keyframes tagGlow{to{text-shadow:0 0 14px rgba(242,182,48,.95),0 0 26px rgba(255,214,140,.7)}}
 .tag-fly{position:fixed;z-index:20;pointer-events:none;font-family:var(--f-script);font-weight:400;white-space:nowrap;text-align:center;color:var(--rose);text-shadow:0 0 14px rgba(255,214,140,1),0 0 34px rgba(242,182,48,.75);will-change:transform,opacity}
 .intro__date{font-family:var(--f-caps);font-weight:600;letter-spacing:.24em;font-size:clamp(.85rem,2vw,1.1rem);line-height:2;color:var(--maroon);margin:0}
-.intro__open{margin-top:18px;font-size:1.15rem;padding:.9em 2.2em;animation:breathe 2.6s ease-in-out infinite}
-@keyframes breathe{0%,100%{box-shadow:0 0 0 0 rgba(197,155,78,.5)}50%{box-shadow:0 0 0 12px rgba(197,155,78,0),0 0 40px rgba(242,182,48,.3)}}
+/* the open button calls for a tap once it has risen in: a point of gold light circles its rim, a warm halo breathes behind it,
+   a sheen sweeps across every few seconds, the arrow nudges, and tiny four-point stars twinkle at its edges */
+@property --open-a{syntax:"<angle>";inherits:false;initial-value:0deg}
+.open-wrap{--open-in:2.6s;position:relative;display:block;width:fit-content;margin:18px auto 0;border-radius:999px;isolation:isolate}
+.open-wrap::before{content:"";position:absolute;z-index:2;inset:-4px;border-radius:inherit;padding:2px;pointer-events:none;background:conic-gradient(from var(--open-a),transparent 0 66%,rgba(255,231,166,.25) 72%,#FFE7A6 80%,#FFFBEA 83%,#E9CD8E 87%,transparent 93% 100%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);filter:drop-shadow(0 0 4px rgba(255,214,140,.9));opacity:0;animation:openOrbit 3.6s linear var(--open-in) infinite}
+.open-wrap::after{content:"";position:absolute;z-index:-1;inset:-26px -34px;border-radius:inherit;background:radial-gradient(closest-side,rgba(242,182,48,.6),rgba(255,214,140,.25) 65%,transparent);opacity:0;animation:openHalo 3s ease-in-out var(--open-in) infinite}
+@keyframes openOrbit{0%{opacity:1}100%{opacity:1;--open-a:360deg}}
+@keyframes openHalo{0%,100%{opacity:.35;transform:scale(.94)}50%{opacity:1;transform:scale(1.04)}}
+.intro__open{font-size:1.15rem;padding:.9em 2.2em;box-shadow:0 14px 30px -14px rgba(78,9,21,.75)}
+.intro__open::after{animation:openSheen 5s var(--ease) calc(var(--open-in) + .8s) infinite}
+@keyframes openSheen{0%{transform:translateX(-120%)}30%,100%{transform:translateX(120%)}}
+.intro__open svg{animation:openNudge 2.4s ease-in-out var(--open-in) infinite}
+@keyframes openNudge{0%,55%,100%{transform:none}25%{transform:translateX(5px)}}
+.open-sparkles{position:absolute;inset:0;pointer-events:none;z-index:3}
+.open-sparkles i{position:absolute;width:var(--s,10px);height:var(--s,10px);background:radial-gradient(#FFF,#FFE3A0 45%,#D9A84A);clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);filter:drop-shadow(0 0 3px rgba(255,214,140,.95));opacity:0;animation:openTwinkle 3.2s ease-in-out infinite}
+.open-sparkles i:nth-child(1){--s:13px;left:-9px;top:-10px;animation-delay:calc(var(--open-in) + .2s)}
+.open-sparkles i:nth-child(2){--s:9px;left:30%;top:-15px;animation-delay:calc(var(--open-in) + 1.4s)}
+.open-sparkles i:nth-child(3){--s:12px;right:-12px;top:22%;animation-delay:calc(var(--open-in) + .8s)}
+.open-sparkles i:nth-child(4){--s:8px;right:24%;bottom:-13px;animation-delay:calc(var(--open-in) + 2.1s)}
+.open-sparkles i:nth-child(5){--s:10px;left:6%;bottom:-8px;animation-delay:calc(var(--open-in) + 2.7s)}
+@keyframes openTwinkle{0%,100%{opacity:0;transform:scale(.2) rotate(0)}45%{opacity:1;transform:scale(1) rotate(45deg)}70%{opacity:0;transform:scale(.4) rotate(90deg)}}
+@media (prefers-reduced-motion:reduce){.open-sparkles{display:none}.open-wrap::before{opacity:0}}
 .intro .rise{opacity:0;transform:translateY(18px);animation:rise 1.4s var(--ease) forwards;animation-delay:calc(var(--i) * 180ms + 200ms)}
 @keyframes rise{to{opacity:1;transform:none}}
 .intro .flora{z-index:3;width:clamp(170px,46vw,340px)}
@@ -452,7 +472,7 @@ section{position:relative;overflow:hidden}
   .intro__date [data-bind="cityCaps"]::before{content:" · "}
   .intro__tag{margin-top:4px}
   .intro__firm{margin:6px auto 0;padding:6px 18px}
-  .intro__open{margin-top:10px}
+  .open-wrap{margin-top:10px}
 }
 
 @media (prefers-reduced-motion:reduce){
