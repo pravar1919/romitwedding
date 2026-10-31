@@ -138,6 +138,23 @@ const markup = `<!-- ============ SVG LIBRARY ============ -->
   <div class="fairy" data-fairy="26" data-pink aria-hidden="true"></div>
   <div class="flora flora--tr" aria-hidden="true"><img src="/flora-tl.webp" alt="" decoding="async" loading="lazy"></div>
   <div class="wrap">
+    <div class="hosts" data-reveal>
+      <div class="hosts__col">
+        <h3>R.S.V.P.</h3>
+        <p><b>Sitaram Gupta</b><br><b>Radhey Shyam Gupta</b></p>
+        <p>122, Scheme No. 8,<br>Gandhi Nagar, Alwar</p>
+        <p>M: <a href="tel:+917597021300">7597021300</a>, <a href="tel:+919460828283">9460828283</a></p>
+      </div>
+      <div class="hosts__col hosts__col--firms">
+        <p><b>Gurjar Mal Ghasiram</b><br>Ghantaghar, Alwar (Raj.)<br>Ph: <a href="tel:+911442346378">0144-2346378</a></p>
+        <svg class="divider" viewBox="0 0 220 22" aria-hidden="true"><use href="#ornament"/></svg>
+        <p><b>M.L. Tele Communication</b><br>Shiv Market, Ghantaghar, Alwar (Raj.)<br>M: <a href="tel:+919875002100">9875002100</a></p>
+      </div>
+      <div class="hosts__col">
+        <h3>Welcome By</h3>
+        <p><b>Ashok – Babita</b><br><b>Rajveer – Urmila</b><br><b>Mukesh – Preeti</b><br><b>Hemant Gupta</b></p>
+      </div>
+    </div>
     <header class="sec-head" data-reveal style="margin-bottom:32px">
       <h2 id="cd-title">Countdown</h2>
       <p class="caps">Until we say ‘I do’</p>
