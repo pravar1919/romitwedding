@@ -157,33 +157,40 @@ const markup = `<!-- ============ SVG LIBRARY ============ -->
       </div>
     </div>
     <div class="arches">
-      <div class="arch arch--main" data-reveal>
+      <div class="arch" data-reveal>
         <p class="arch__hi" lang="hi">॥ विशेष आग्रह ॥</p>
         <h3>Special Request</h3>
         <svg class="divider" viewBox="0 0 220 22" aria-hidden="true"><use href="#ornament"/></svg>
-        <ul class="arch__list">
-          <li>Munni <span>–</span> Ramcharan Ji</li>
-          <li>Santosh <span>–</span> Shrimohan Ji</li>
-          <li>Neha <span>–</span> Gauranchal Ji</li>
-        </ul>
-        <ul class="arch__pair arch__pair--ruled"><li>Dr. Sheweta</li><li>Saumiya</li></ul>
+        <div class="arch__body">
+          <ul class="arch__list">
+            <li>Munni <span>–</span> Ramcharan Ji</li>
+            <li>Santosh <span>–</span> Shrimohan Ji</li>
+            <li>Neha <span>–</span> Gauranchal Ji</li>
+          </ul>
+          <ul class="arch__pair"><li>Dr. Sheweta</li><li>Saumiya</li></ul>
+        </div>
       </div>
-      <div class="arch arch--wbcf" data-reveal style="--i:1">
-        <p class="arch__hi" lang="hi">॥ शुभेच्छु ॥</p>
-        <h3>W.B.C.F.</h3>
-        <p class="arch__sub">With best compliments from</p>
-        <ul class="arch__list">
-          <li>Kishitiz</li>
-          <li>Chinany</li>
-          <li>Gourav</li>
-          <li class="arch__all">All Family &amp; Friends</li>
-        </ul>
-      </div>
-      <div class="arch arch--child" data-reveal style="--i:2">
+      <div class="arch" data-reveal style="--i:1">
         <p class="arch__hi" lang="hi">॥ बाल मनुहार ॥</p>
         <h3>Child Request</h3>
         <svg class="divider" viewBox="0 0 220 22" aria-hidden="true"><use href="#ornament"/></svg>
-        <ul class="arch__pair"><li>Sanaya</li><li>Ojasvi</li></ul>
+        <div class="arch__body">
+          <ul class="arch__list arch__list--kids"><li>Sanaya</li><li>Ojasvi</li></ul>
+        </div>
+      </div>
+      <div class="arch" data-reveal style="--i:2">
+        <p class="arch__hi" lang="hi">॥ शुभेच्छु ॥</p>
+        <h3>W.B.C.F.</h3>
+        <svg class="divider" viewBox="0 0 220 22" aria-hidden="true"><use href="#ornament"/></svg>
+        <div class="arch__body">
+          <p class="arch__sub">With best compliments from</p>
+          <ul class="arch__list">
+            <li>Kishitiz</li>
+            <li>Chinany</li>
+            <li>Gourav</li>
+            <li class="arch__all">All Family &amp; Friends</li>
+          </ul>
+        </div>
       </div>
     </div>
     <p class="card-note" data-reveal><b>Note</b>Please accept the invitation for Ladies by this card.</p>

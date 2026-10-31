@@ -382,29 +382,27 @@ section{position:relative;overflow:hidden}
 @media (max-width:760px){
   .hosts{grid-template-columns:1fr}
 }
-/* special request, W.B.C.F. and child request: three arches like a temple front, the tallest in the middle, each with a gold finial */
-.arches{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr) minmax(0,1fr);gap:clamp(16px,2.4vw,28px);align-items:end;max-width:1040px;margin:0 auto 34px;position:relative;z-index:3}
-.arch{position:relative;text-align:center;padding:46px clamp(16px,2vw,24px) 28px;background:linear-gradient(#FFFDF6,#FFF5E3);border:1.5px solid var(--gold);border-radius:280px 280px 22px 22px / 120px 120px 22px 22px;box-shadow:inset 0 0 0 6px #FFFDF6,inset 0 0 0 7px rgba(197,155,78,.45),0 26px 54px -32px rgba(110,40,30,.55)}
+/* special request, child request and W.B.C.F.: three matching arches, each with a gold finial; headings line up and the names sit centred below */
+.arches{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,28px);max-width:1040px;margin:0 auto 34px;position:relative;z-index:3}
+.arch{position:relative;display:flex;flex-direction:column;text-align:center;padding:clamp(46px,5vw,54px) clamp(16px,2vw,26px) 30px;background:linear-gradient(#FFFDF6,#FFF5E3);border:1.5px solid var(--gold);border-radius:280px 280px 22px 22px / 130px 130px 22px 22px;box-shadow:inset 0 0 0 6px #FFFDF6,inset 0 0 0 7px rgba(197,155,78,.45),0 26px 54px -32px rgba(110,40,30,.55)}
 .arch::before{content:"";position:absolute;top:-9px;left:50%;width:15px;height:15px;transform:translateX(-50%) rotate(45deg);background:var(--gold);box-shadow:0 0 0 5px var(--paper)}
-.arch--main{order:2;padding:clamp(48px,6vw,58px) clamp(22px,4vw,44px) 34px;border-radius:280px 280px 22px 22px / 150px 150px 22px 22px}
-.arch--wbcf{order:1}
-.arch--child{order:3}
 .arch__hi{font-family:"Tiro Devanagari Hindi","Noto Serif Devanagari",serif;font-size:1.05rem;letter-spacing:.06em;color:var(--rose);margin:0}
-.arch h3{font-family:var(--f-script);font-weight:400;font-size:clamp(2.1rem,3.6vw,2.6rem);line-height:1.1;color:var(--maroon);margin:2px 0 0}
-.arch--main h3{font-size:clamp(2.4rem,5vw,3rem)}
-.arch .divider{width:130px;margin:4px auto 16px}
-.arch__sub{font-family:var(--f-caps);font-weight:700;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dk);margin:6px 0 14px}
+.arch h3{font-family:var(--f-script);font-weight:400;font-size:clamp(2.1rem,3.4vw,2.6rem);line-height:1.1;color:var(--maroon);margin:2px 0 0;white-space:nowrap}
+.arch .divider{width:130px;margin:4px auto 14px}
+.arch__body{flex:1;display:flex;flex-direction:column;justify-content:center}
+.arch__sub{font-family:var(--f-caps);font-weight:700;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dk);margin:0 0 10px}
 .arch ul{list-style:none;margin:0;padding:0}
 .arch__list{display:grid;gap:4px}
-.arch li{font-weight:700;font-size:clamp(1.05rem,1.5vw,1.2rem);color:var(--ink)}
+.arch li{font-weight:700;font-size:clamp(1.02rem,1.4vw,1.16rem);color:var(--ink)}
 .arch__list span{color:var(--gold-dk);padding:0 .1em}
 .arch .arch__all{font-style:italic;font-weight:600;color:var(--muted);margin-top:6px}
-.arch .arch__pair{display:flex;justify-content:center;align-items:center;flex-wrap:wrap}
-.arch .arch__pair--ruled{width:fit-content;min-width:60%;margin:16px auto 0;padding-top:14px;border-top:1px solid rgba(197,155,78,.4)}
-.arch__pair li+li::before{content:"";display:inline-block;width:6px;height:6px;margin:0 16px;vertical-align:3px;transform:rotate(45deg);background:var(--gold)}
+.arch .arch__pair{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:fit-content;min-width:70%;margin:14px auto 0;padding-top:12px;border-top:1px solid rgba(197,155,78,.4)}
+.arch__pair li+li::before{content:"";display:inline-block;width:6px;height:6px;margin:0 14px;vertical-align:3px;transform:rotate(45deg);background:var(--gold)}
+.arch .arch__list--kids{gap:0}
+.arch__list--kids li{font-size:clamp(1.25rem,1.9vw,1.45rem)}
+.arch__list--kids li+li::before{content:"";display:block;width:7px;height:7px;margin:10px auto;transform:rotate(45deg);background:var(--gold)}
 @media (max-width:860px){
   .arches{grid-template-columns:minmax(0,1fr);max-width:520px;row-gap:34px}
-  .arches .arch{order:0}
 }
 /* the ladies' note: a ribbon ruled in fading gold */
 .card-note{position:relative;z-index:3;max-width:620px;margin:0 auto clamp(70px,9vw,100px);padding:12px 20px;text-align:center;font-style:italic;font-weight:600;color:var(--muted);text-wrap:balance;border:solid;border-width:1px 0;border-image:linear-gradient(90deg,transparent,var(--gold),transparent) 1;background:linear-gradient(90deg,transparent,rgba(235,169,172,.2),transparent)}
