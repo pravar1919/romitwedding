@@ -58,7 +58,7 @@ const markup = `<!-- ============ SVG LIBRARY ============ -->
     <div class="ganesh rise" style="--i:0"><span class="ganesh__halo" aria-hidden="true"></span><div class="ganesh__img" id="ganesh"></div><p class="ganesh__mantra" lang="hi">॥ श्री गणेशाय नमः ॥</p></div>
     <p class="lead rise" style="--i:1">You are cordially invited<br>to the wedding of</p>
     <h1 class="intro__names shimmer-maroon rise" style="--i:2" id="intro-names"><span data-bind="nameA">Romit</span> <span class="amp">&amp;</span> <span data-bind="nameB"><span class="cap-a">A</span>yushi</span></h1>
-    <div class="intro__families rise" style="--i:3"><p><span class="fam-name" data-bind="familyNameA">Romit Gupta</span><span class="fam-parents" data-bind="familyParentsA">G/S/o Late Smt. Gaindo Bai &amp; Late Sh. Manoharlal Gupta</span></p><span class="fam-weds" aria-hidden="true">Weds</span><p><span class="fam-name" data-bind="familyNameB">Ayushi Gupta</span><span class="fam-parents" data-bind="familyParentsB">D/o Smt. Usha Gupta &amp; Sh. Mahaveer Prasad Ji Gupta</span><span class="fam-note" data-bind="familyNoteB">R/o Delhi</span></p></div>
+    <div class="families intro__families rise" style="--i:3"><p><span class="fam-name" data-bind="familyNameA">Romit Gupta</span></p><span class="fam-weds" aria-hidden="true">Weds</span><p><span class="fam-name" data-bind="familyNameB">Ayushi Gupta</span></p></div>
     <p class="intro__date rise" style="--i:3"><span data-bind="dateLong">30 November 2026</span><br><span data-bind="cityCaps">Alwar, Rajasthan</span></p>
     <p class="intro__tag rise" style="--i:4" data-bind="hashtag">#ROHI</p>
     <p class="intro__firm rise" style="--i:4"><span class="firm-name" data-bind="firmName">Gujarmal Ghasiram</span><span class="firm-place" data-bind="firmPlace">Clock Tower, Alwar</span></p>
@@ -91,6 +91,7 @@ const markup = `<!-- ============ SVG LIBRARY ============ -->
   <div class="hero__text">
     <p class="hero__kicker hero__fade d1">The wedding celebrations of</p>
     <h2 class="hero__names shimmer-maroon" id="hero-names" tabindex="-1"><span class="w" data-bind="nameA">Romit</span> <span class="w">&amp;</span> <span class="w" data-bind="nameB"><span class="cap-a">A</span>yushi</span></h2>
+    <div class="families hero__families hero__fade d2"><p><span class="fam-name" data-bind="familyNameA">Romit Gupta</span><span class="fam-parents" data-bind="familyParentsA">G/S/o Late Smt. Gaindo Bai &amp; Late Sh. Manoharlal Gupta</span></p><span class="fam-weds" aria-hidden="true">Weds</span><p><span class="fam-name" data-bind="familyNameB">Ayushi Gupta</span><span class="fam-parents" data-bind="familyParentsB">D/o Smt. Usha Gupta &amp; Sh. Mahaveer Prasad Ji Gupta</span><span class="fam-note" data-bind="familyNoteB">R/o Delhi</span></p></div>
     <p class="hero__sub hero__fade d2"><span>A journey of love</span></p>
     <p class="hero__sub hero__fade d2"><span data-bind="dateRangeCaps">29 – 30 Nov 2026</span><span class="sep"></span><span data-bind="cityCaps">Alwar, Rajasthan</span></p>
     <svg class="divider hero__fade d3" viewBox="0 0 220 22" aria-hidden="true"><use href="#ornament"/></svg>
