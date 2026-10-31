@@ -58,7 +58,7 @@ const markup = `<!-- ============ SVG LIBRARY ============ -->
     <div class="ganesh rise" style="--i:0"><span class="ganesh__halo" aria-hidden="true"></span><div class="ganesh__img" id="ganesh"></div><p class="ganesh__mantra" lang="hi">॥ श्री गणेशाय नमः ॥</p></div>
     <p class="lead rise" style="--i:1">You are cordially invited<br>to the wedding of</p>
     <h1 class="intro__names shimmer-maroon rise" style="--i:2" id="intro-names"><span data-bind="nameA">Romit</span> <span class="amp">&amp;</span> <span data-bind="nameB"><span class="cap-a">A</span>yushi</span></h1>
-    <div class="intro__families rise" style="--i:3"><p><span class="fam-name" data-bind="familyNameA">Romit Gupta</span><span class="fam-parents" data-bind="familyParentsA">S/o Smt. Ranjana &amp; Shri Radhey Shyam Gupta</span></p><span class="fam-weds" aria-hidden="true">Weds</span><p><span class="fam-name" data-bind="familyNameB">Ayushi Gupta</span><span class="fam-parents" data-bind="familyParentsB">D/o Smt. Usha Gupta &amp; Shri Mahaveer Prasad Gupta</span></p></div>
+    <div class="intro__families rise" style="--i:3"><p><span class="fam-name" data-bind="familyNameA">Romit Gupta</span><span class="fam-parents" data-bind="familyParentsA">S/o Smt. Ranjana &amp; Shri Radhey Shyam Gupta</span><span class="fam-note" data-bind="familyNoteA">G/S/o Late Smt. Gaindo Bai &amp; Late Sh. Manoharlal Gupta</span></p><span class="fam-weds" aria-hidden="true">Weds</span><p><span class="fam-name" data-bind="familyNameB">Ayushi Gupta</span><span class="fam-parents" data-bind="familyParentsB">D/o Smt. Usha Gupta &amp; Sh. Mahaveer Prasad Ji Gupta</span><span class="fam-note" data-bind="familyNoteB">R/o Delhi</span></p></div>
     <p class="intro__date rise" style="--i:3"><span data-bind="dateLong">30 November 2026</span><br><span data-bind="cityCaps">Alwar, Rajasthan</span></p>
     <p class="intro__tag rise" style="--i:4" data-bind="hashtag">#ROHI</p>
     <p class="intro__firm rise" style="--i:4"><span class="firm-name" data-bind="firmName">Gujarmal Ghasiram</span><span class="firm-place" data-bind="firmPlace">Clock Tower, Alwar</span></p>
@@ -143,16 +143,16 @@ const markup = `<!-- ============ SVG LIBRARY ============ -->
         <h3>R.S.V.P.</h3>
         <p><b>Sitaram Gupta</b><br><b>Radhey Shyam Gupta</b></p>
         <p>122, Scheme No. 8,<br>Gandhi Nagar, Alwar</p>
-        <p>M: <a href="tel:+917597021300">7597021300</a>, <a href="tel:+919460828283">9460828283</a></p>
+        <p>M: <a href="tel:+919460828283">9460828283</a>, <a href="tel:+917597021300">7597021300</a></p>
       </div>
       <div class="hosts__col hosts__col--firms">
-        <p><b>Gurjar Mal Ghasiram</b><br>Ghantaghar, Alwar (Raj.)<br>Ph: <a href="tel:+911442346378">0144-2346378</a></p>
+        <p><b>Gurjar Mal Ghasi Ram</b><br>Ghantaghar, Alwar (Raj.)<br>Ph: <a href="tel:+911442346378">0144-2346378</a></p>
         <svg class="divider" viewBox="0 0 220 22" aria-hidden="true"><use href="#ornament"/></svg>
         <p><b>M.L. Tele Communication</b><br>Shiv Market, Ghantaghar, Alwar (Raj.)<br>M: <a href="tel:+919875002100">9875002100</a></p>
       </div>
       <div class="hosts__col">
         <h3>Welcome By</h3>
-        <p><b>Ashok – Babita</b><br><b>Rajveer – Urmila</b><br><b>Mukesh – Preeti</b><br><b>Hemant Gupta</b></p>
+        <p><b>Ashok – Babita</b><br><b>Rajeev – Urmila</b><br><b>Mukesh – Preeti</b><br><b>Hemant Gupta</b></p>
       </div>
     </div>
     <header class="sec-head" data-reveal style="margin-bottom:32px">

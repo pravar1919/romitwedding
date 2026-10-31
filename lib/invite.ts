@@ -43,8 +43,8 @@ const num = (d, k) => +fmt(d, { [k]: 'numeric' });
 const { a: A, b: B } = CONFIG.couple;
 const binds = {
   nameA: A, nameB: B, initialA: A[0], initialB: B[0],
-  familyNameA: CONFIG.families.a.name, familyParentsA: CONFIG.families.a.parents,
-  familyNameB: CONFIG.families.b.name, familyParentsB: CONFIG.families.b.parents,
+  familyNameA: CONFIG.families.a.name, familyParentsA: CONFIG.families.a.parents, familyNoteA: CONFIG.families.a.note,
+  familyNameB: CONFIG.families.b.name, familyParentsB: CONFIG.families.b.parents, familyNoteB: CONFIG.families.b.note,
   dateLong: fmt(weddingDay, { day: 'numeric', month: 'long', year: 'numeric' }),
   dateRangeCaps: `${fmt(first, { day: 'numeric', month: 'short' })} – ${fmt(last, { day: 'numeric', month: 'short', year: 'numeric' })}`,
   cityCaps: CONFIG.city, heroLine: CONFIG.heroLine, tagline: CONFIG.tagline, farewell: CONFIG.farewell, hashtag: CONFIG.hashtag, firmName: CONFIG.firm.name, firmPlace: CONFIG.firm.place,
