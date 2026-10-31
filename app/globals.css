@@ -255,7 +255,7 @@ html.intro-open main,html.intro-open footer{visibility:hidden}
 .js .hero__fig{opacity:0}
 .js .hero.live .hero__fig{animation:figIn 1.8s var(--ease) .3s both}
 .js .hero.live .hero__fig--b{animation-delay:.55s}
-.hero__text{position:relative;z-index:5;text-align:center;align-self:center;padding:clamp(170px,22vh,230px) 0 clamp(70px,10vh,110px);color:var(--maroon);max-width:640px}
+.hero__text{position:relative;z-index:5;text-align:center;align-self:center;padding:clamp(170px,22vh,230px) 0 clamp(110px,13vh,130px);color:var(--maroon);max-width:640px}
 .hero__kicker{font-family:var(--f-caps);font-weight:700;letter-spacing:.32em;font-size:clamp(.7rem,1.5vw,.85rem);color:#7E2A2F;margin:0}
 .hero__names{font-family:var(--f-script);font-weight:400;font-size:clamp(3.2rem,6.4vw,5.6rem);line-height:1.08;margin:.06em 0 .02em;padding:0 .15em}
 .hero__names span{display:inline-block}
@@ -271,7 +271,7 @@ html.intro-open main,html.intro-open footer{visibility:hidden}
 .hero__names{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .hero__families{flex-direction:column;align-items:center;gap:2px;margin:.2em 0 .6em}
 .hero__families p{max-width:none}
-.hero__families .fam-name{font-family:var(--f-script);font-weight:400;letter-spacing:0;font-size:clamp(2rem,4.6vw,3.6rem);line-height:1.15;color:var(--maroon)}
+.hero__families .fam-name{font-family:var(--f-script);font-weight:400;letter-spacing:0;font-size:clamp(2.7rem,6vw,5rem);line-height:1.1;color:var(--maroon);-webkit-text-stroke:.025em currentColor;paint-order:stroke fill} /* the script face has no bold weight, so a thin stroke thickens it */
 .hero__families .fam-name .cap-a{font-family:"Pinyon Script",var(--f-script)}
 .hero__families .fam-weds{display:block;font-family:var(--f-caps);font-weight:700;letter-spacing:.3em;font-size:.88rem;color:var(--gold-dk);margin:8px 0 4px}
 .js .hero__fade{opacity:0;transform:translateY(16px)}
