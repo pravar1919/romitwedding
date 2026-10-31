@@ -91,7 +91,7 @@ const markup = `<!-- ============ SVG LIBRARY ============ -->
   <div class="hero__text">
     <p class="hero__kicker hero__fade d1">The wedding celebrations of</p>
     <h2 class="hero__names shimmer-maroon" id="hero-names" tabindex="-1"><span class="w" data-bind="nameA">Romit</span> <span class="w">&amp;</span> <span class="w" data-bind="nameB"><span class="cap-a">A</span>yushi</span></h2>
-    <div class="families hero__families hero__fade d2"><p><span class="fam-name" data-bind="familyNameA">Romit Gupta</span><span class="fam-parents" data-bind="familyParentsA">G/S/o Late Smt. Gaindo Bai &amp; Late Sh. Manoharlal Gupta</span></p><span class="fam-weds" aria-hidden="true">Weds</span><p><span class="fam-name" data-bind="familyNameB">Ayushi Gupta</span><span class="fam-parents" data-bind="familyParentsB">D/o Smt. Usha Gupta &amp; Sh. Mahaveer Prasad Ji Gupta</span><span class="fam-note" data-bind="familyNoteB">R/o Delhi</span></p></div>
+    <div class="families hero__families hero__fade d2"><p><span class="fam-name" data-bind="familyNameA">Romit Gupta</span><span class="fam-parents" data-bind="familyParentsA">G/S/o Late Smt. Gaindo Bai &amp; Late Sh. Manohar Lal Gupta</span></p><span class="fam-weds" aria-hidden="true">Weds</span><p><span class="fam-name" data-bind="familyNameB">Ayushi Gupta</span><span class="fam-parents" data-bind="familyParentsB">D/o Smt. Usha Gupta &amp; Sh. Mahaveer Prasad Ji Gupta</span><span class="fam-note" data-bind="familyNoteB">R/o Delhi</span></p></div>
     <p class="hero__sub hero__fade d2"><span>A journey of love</span></p>
     <p class="hero__sub hero__fade d2"><span data-bind="dateRangeCaps">29 – 30 Nov 2026</span><span class="sep"></span><span data-bind="cityCaps">Alwar, Rajasthan</span></p>
     <svg class="divider hero__fade d3" viewBox="0 0 220 22" aria-hidden="true"><use href="#ornament"/></svg>
@@ -155,6 +155,17 @@ const markup = `<!-- ============ SVG LIBRARY ============ -->
         <h3>Welcome By</h3>
         <p><b>Ashok – Babita</b><br><b>Rajeev – Urmila</b><br><b>Mukesh – Preeti</b><br><b>Hemant Gupta</b></p>
       </div>
+    </div>
+    <div class="request" data-reveal>
+      <p class="request__hi" lang="hi">॥ विशेष आग्रह ॥</p>
+      <h3>Special Request</h3>
+      <svg class="divider" viewBox="0 0 220 22" aria-hidden="true"><use href="#ornament"/></svg>
+      <ul class="request__couples">
+        <li>Munni <span>–</span> Ramcharan Ji</li>
+        <li>Santosh <span>–</span> Shrimohan Ji</li>
+        <li>Neha <span>–</span> Gauranchal Ji</li>
+      </ul>
+      <ul class="request__names"><li>Dr. Sheweta</li><li>Saumiya</li></ul>
     </div>
     <header class="sec-head" data-reveal style="margin-bottom:32px">
       <h2 id="cd-title">Countdown</h2>
