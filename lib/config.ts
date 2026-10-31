@@ -5,7 +5,7 @@ export const CONFIG = {
   // Public address of the site, used for link previews (WhatsApp, iMessage, etc.)
   siteUrl: 'https://romitayushi.in',
   couple: { a: 'Romit', b: 'Ayushi' },
-  families: { a: { name: 'Romit Gupta', parents: 'G/S/o Late Smt. Gaindo Bai & Late Sh. Manoharlal Gupta' }, b: { name: 'Ayushi Gupta', parents: 'D/o Smt. Usha Gupta & Sh. Mahaveer Prasad Ji Gupta', note: 'R/o Delhi' } }, // shown under the names on the invitation; note is an extra line below the parents
+  families: { a: { name: 'Romit Gupta', parents: 'G/S/o Late Smt. Gaindo Bai & Late Sh. Manohar Lal Gupta' }, b: { name: 'Ayushi Gupta', parents: 'D/o Smt. Usha Gupta & Sh. Mahaveer Prasad Ji Gupta', note: 'R/o Delhi' } }, // shown under the names on the invitation; note is an extra line below the parents
   hashtag: '#ROHI',
   firm: { name: 'Gujarmal Ghasiram', place: 'Clock Tower, Alwar' }, // family firm, highlighted just below the hashtag on the invitation card
   song: { youtubeId: '1LVpuWpRs3I', start: 23, title: 'Din Shagna Da · Phillauri' }, // played by the music button through a hidden YouTube player; start (seconds) skips the instrumental intro
@@ -29,12 +29,12 @@ export const CONFIG = {
   // art: optional illustration used as the event card's backdrop (cut-outs live in public/art; w/h are its pixel size)
   events: [
     { id: 'haldi', name: 'Haldi', tagline: 'Turmeric, marigolds, and a little chaos', start: '2026-11-29T11:15:00+05:30', venue: 'sagar', icon: 'haldi', art: { src: '/art/haldi.webp', w: 316, h: 561, alt: 'Illustration of the couple at their haldi, smearing turmeric on each other' } },
-    { id: 'bhat', name: 'Bhat', tagline: 'The maternal family arrives with blessings and gifts', start: '2026-11-29T18:00:00+05:30', venue: 'sagar', icon: 'thali', art: { src: '/art/bhat.webp', w: 510, h: 877, alt: 'Illustration of the bride’s maternal family arriving with gift boxes and blessings' } },
-    { id: 'sangeet', name: 'Sangeet', tagline: 'Two families, one dance floor', start: '2026-11-29T19:00:00+05:30', venue: 'sagar', icon: 'sangeet', art: { src: '/art/sangeet.webp', w: 333, h: 569, alt: 'Illustration of the couple dancing under a disco ball at the sangeet' } },
-    { id: 'lagan', name: 'Lagan', tagline: 'The auspicious hour is set', start: '2026-11-30T08:00:00+05:30', venue: 'sagar', icon: 'kalash', art: { src: '/art/lagan.webp', w: 496, h: 875, alt: 'Illustration of the couple with the pandit reading the lagan under a marigold canopy' } },
-    { id: 'ghudchadi', name: 'Ghudchadi', tagline: 'The groom rides out on his ghodi', start: '2026-11-30T10:00:00+05:30', venue: 'sagar', icon: 'ghodi', art: { src: '/art/baraat.webp', w: 590, h: 437, alt: 'Illustration of the groom on his white ghodi under a red chhatri, with dhol players' } },
+    { id: 'bhat', name: 'Bhat', tagline: 'The maternal family arrives with blessings and gifts', start: '2026-11-29T18:15:00+05:30', venue: 'sagar', icon: 'thali', art: { src: '/art/bhat.webp', w: 510, h: 877, alt: 'Illustration of the bride’s maternal family arriving with gift boxes and blessings' } },
+    { id: 'sangeet', name: 'Sangeet', tagline: 'Two families, one dance floor', start: '2026-11-29T19:15:00+05:30', venue: 'sagar', icon: 'sangeet', art: { src: '/art/sangeet.webp', w: 333, h: 569, alt: 'Illustration of the couple dancing under a disco ball at the sangeet' } },
+    { id: 'lagan', name: 'Lagan', tagline: 'The auspicious hour is set', start: '2026-11-30T08:15:00+05:30', venue: 'sagar', icon: 'kalash', art: { src: '/art/lagan.webp', w: 496, h: 875, alt: 'Illustration of the couple with the pandit reading the lagan under a marigold canopy' } },
+    { id: 'ghudchadi', name: 'Ghudchadi', tagline: 'The groom rides out on his ghodi', start: '2026-11-30T10:15:00+05:30', venue: 'sagar', icon: 'ghodi', art: { src: '/art/baraat.webp', w: 590, h: 437, alt: 'Illustration of the groom on his white ghodi under a red chhatri, with dhol players' } },
     { id: 'phere', name: 'Phere', tagline: 'Seven vows around the sacred fire', start: '2026-11-30T13:15:00+05:30', venue: 'sagar', icon: 'mandap', art: { src: '/art/pheras.webp', w: 927, h: 430, alt: 'Illustration of the couple at the sacred fire under the mandap, the groom applying sindoor' } },
-    { id: 'reception', name: 'Reception', tagline: 'Dinner, toasts, and a last dance', start: '2026-11-30T19:00:00+05:30', venue: 'sagar', icon: 'reception', art: { src: '/art/reception.webp', w: 523, h: 888, alt: 'Illustration of the couple walking in arm in arm at the reception, she in a blush lehenga, he in a black and gold tuxedo' } },
+    { id: 'reception', name: 'Reception', tagline: 'Dinner, toasts, and a last dance', start: '2026-11-30T19:15:00+05:30', venue: 'sagar', icon: 'reception', art: { src: '/art/reception.webp', w: 523, h: 888, alt: 'Illustration of the couple walking in arm in arm at the reception, she in a blush lehenga, he in a black and gold tuxedo' } },
   ],
   travel: [
     { title: 'Getting here', icon: 'plane', items: [
