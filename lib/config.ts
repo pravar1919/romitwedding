@@ -5,7 +5,7 @@ export const CONFIG = {
   // Public address of the site, used for link previews (WhatsApp, iMessage, etc.)
   siteUrl: 'https://romitayushi.in',
   couple: { a: 'Romit', b: 'Ayushi' },
-  families: { a: { name: 'Romit Gupta', parents: 'S/o Smt. Ranjana & Shri Radhey Shyam Gupta', note: 'G/S/o Late Smt. Gaindo Bai & Late Sh. Manoharlal Gupta' }, b: { name: 'Ayushi Gupta', parents: 'D/o Smt. Usha Gupta & Sh. Mahaveer Prasad Ji Gupta', note: 'R/o Delhi' } }, // shown under the names on the invitation; note is an extra line below the parents
+  families: { a: { name: 'Romit Gupta', parents: 'G/S/o Late Smt. Gaindo Bai & Late Sh. Manoharlal Gupta' }, b: { name: 'Ayushi Gupta', parents: 'D/o Smt. Usha Gupta & Sh. Mahaveer Prasad Ji Gupta', note: 'R/o Delhi' } }, // shown under the names on the invitation; note is an extra line below the parents
   hashtag: '#ROHI',
   firm: { name: 'Gujarmal Ghasiram', place: 'Clock Tower, Alwar' }, // family firm, highlighted just below the hashtag on the invitation card
   song: { youtubeId: '1LVpuWpRs3I', start: 23, title: 'Din Shagna Da · Phillauri' }, // played by the music button through a hidden YouTube player; start (seconds) skips the instrumental intro
