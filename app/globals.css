@@ -364,10 +364,8 @@ section{position:relative;overflow:hidden}
 .cd__l{display:block;font-family:var(--f-caps);font-weight:700;font-size:.74rem;letter-spacing:.2em;color:var(--muted);margin-top:8px}
 .cd-label{margin:22px 0 0;font-style:italic;font-weight:600;color:var(--muted)}
 .hosts{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,1fr);gap:clamp(18px,3vw,34px);align-items:start;margin:0 auto clamp(60px,8vw,90px);max-width:980px;position:relative;z-index:3}
-.hosts__col{background:rgba(255,253,246,.8);border:1px solid rgba(197,155,78,.45);border-radius:20px;padding:20px 18px 6px}
-.hosts__col:first-child{text-align:left}
-.hosts__col:last-child{text-align:center}
-.hosts__col--firms{text-align:center;align-self:center;background:transparent;border:0}
+.hosts__col{text-align:center;background:rgba(255,253,246,.8);border:1px solid rgba(197,155,78,.45);border-radius:20px;padding:20px 18px 6px}
+.hosts__col--firms{align-self:center;background:transparent;border:0}
 .hosts h3{font-family:var(--f-script);font-weight:400;font-size:2.1rem;line-height:1.1;color:var(--maroon);margin:0 0 10px}
 .hosts p{margin:0 0 14px;color:var(--muted);line-height:1.6}
 .hosts b{color:var(--ink);font-weight:700}
@@ -375,7 +373,6 @@ section{position:relative;overflow:hidden}
 .hosts .divider{width:140px;margin:0 auto 14px}
 @media (max-width:760px){
   .hosts{grid-template-columns:1fr}
-  .hosts__col:first-child{text-align:center}
 }
 
 /* ---------- VENUES & TRAVEL ---------- */
