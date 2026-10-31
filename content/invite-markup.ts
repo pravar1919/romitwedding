@@ -156,17 +156,37 @@ const markup = `<!-- ============ SVG LIBRARY ============ -->
         <p><b>Ashok – Babita</b><br><b>Rajeev – Urmila</b><br><b>Mukesh – Preeti</b><br><b>Hemant Gupta</b></p>
       </div>
     </div>
-    <div class="request" data-reveal>
-      <p class="request__hi" lang="hi">॥ विशेष आग्रह ॥</p>
-      <h3>Special Request</h3>
-      <svg class="divider" viewBox="0 0 220 22" aria-hidden="true"><use href="#ornament"/></svg>
-      <ul class="request__couples">
-        <li>Munni <span>–</span> Ramcharan Ji</li>
-        <li>Santosh <span>–</span> Shrimohan Ji</li>
-        <li>Neha <span>–</span> Gauranchal Ji</li>
-      </ul>
-      <ul class="request__names"><li>Dr. Sheweta</li><li>Saumiya</li></ul>
+    <div class="arches">
+      <div class="arch arch--main" data-reveal>
+        <p class="arch__hi" lang="hi">॥ विशेष आग्रह ॥</p>
+        <h3>Special Request</h3>
+        <svg class="divider" viewBox="0 0 220 22" aria-hidden="true"><use href="#ornament"/></svg>
+        <ul class="arch__list">
+          <li>Munni <span>–</span> Ramcharan Ji</li>
+          <li>Santosh <span>–</span> Shrimohan Ji</li>
+          <li>Neha <span>–</span> Gauranchal Ji</li>
+        </ul>
+        <ul class="arch__pair arch__pair--ruled"><li>Dr. Sheweta</li><li>Saumiya</li></ul>
+      </div>
+      <div class="arch arch--wbcf" data-reveal style="--i:1">
+        <p class="arch__hi" lang="hi">॥ शुभेच्छु ॥</p>
+        <h3>W.B.C.F.</h3>
+        <p class="arch__sub">With best compliments from</p>
+        <ul class="arch__list">
+          <li>Kishitiz</li>
+          <li>Chinany</li>
+          <li>Gourav</li>
+          <li class="arch__all">All Family &amp; Friends</li>
+        </ul>
+      </div>
+      <div class="arch arch--child" data-reveal style="--i:2">
+        <p class="arch__hi" lang="hi">॥ बाल मनुहार ॥</p>
+        <h3>Child Request</h3>
+        <svg class="divider" viewBox="0 0 220 22" aria-hidden="true"><use href="#ornament"/></svg>
+        <ul class="arch__pair"><li>Sanaya</li><li>Ojasvi</li></ul>
+      </div>
     </div>
+    <p class="card-note" data-reveal><b>Note</b>Please accept the invitation for Ladies by this card.</p>
     <header class="sec-head" data-reveal style="margin-bottom:32px">
       <h2 id="cd-title">Countdown</h2>
       <p class="caps">Until we say ‘I do’</p>
