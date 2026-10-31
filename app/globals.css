@@ -271,7 +271,7 @@ html.intro-open main,html.intro-open footer{visibility:hidden}
 .hero__names{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .hero__families{flex-direction:column;align-items:center;gap:2px;margin:.2em 0 .6em}
 .hero__families p{max-width:none}
-.hero__families .fam-name{font-family:var(--f-script);font-weight:400;letter-spacing:0;font-size:clamp(2.7rem,6vw,5rem);line-height:1.1;color:var(--maroon);-webkit-text-stroke:.025em currentColor;paint-order:stroke fill} /* the script face has no bold weight, so a thin stroke thickens it */
+.hero__families .fam-name{font-family:var(--f-script);font-weight:400;letter-spacing:0;font-size:clamp(2.7rem,6vw,5rem);line-height:1.1;color:var(--maroon)}
 .hero__families .fam-name .cap-a{font-family:"Pinyon Script",var(--f-script)}
 .hero__families .fam-weds{display:block;font-family:var(--f-caps);font-weight:700;letter-spacing:.3em;font-size:.88rem;color:var(--gold-dk);margin:8px 0 4px}
 .js .hero__fade{opacity:0;transform:translateY(16px)}
